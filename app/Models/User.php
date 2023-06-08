@@ -9,11 +9,9 @@ class User extends \TCG\Voyager\Models\User
 {
     use HasFactory;
 
-
     public function getIsAdminAttribute()
     {
         return $this->roles->pluck( 'name' )->contains( 'admin' );
     }
-
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pub;
+use App\Models\publication;
 use App\Http\Requests\StorepubRequest;
 use App\Http\Requests\UpdatepubRequest;
 
@@ -16,7 +16,7 @@ class PubController extends Controller
      */
     public function index()
     {
-        $data=pub::all() ;
+        $data=publication::all() ;
         return view("pages.actualite.actualite",compact('data'));
         //return view('pages.actualite.actualite')->with('data', $data);
     }
@@ -50,7 +50,7 @@ class PubController extends Controller
      */
     public function show(pub $pub)
     {
-        $data=pub::all() ;
+        $data=publication::all() ;
         return view("pages.actualite.actualite",compact('data'));
         //return view('pages.actualite.actualite')->with('data', $data);
     }

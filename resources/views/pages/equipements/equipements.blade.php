@@ -111,6 +111,7 @@
           <div class="container">
             <div class="row">
               @foreach($machine as $row)
+              @if( $row['local'] =='radio1')
               <!-------------------- machine 1 ----------------------->
               <div class="col-sm-3">
                 <div class="work-box">
@@ -138,6 +139,7 @@
                   </div>
                 </div>
               </div>
+              @endif
               @endforeach
             </div>
         </section>
@@ -148,6 +150,8 @@
           <div class="container">
             <div class="row">
               <!-------------------- machine 1 ----------------------->
+              @foreach($machine as $row)
+               @if( $row['local'] =='radio2')
               <div class="col-sm-3">
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
@@ -158,9 +162,9 @@
                   <div class="work-content">
                     <div class="row">
                       <div class="col-sm-8">
-                        <h2 class="w-title">Machine 1</h2>
+                        <h2 class="w-title"> {{$row['label']}}</h2>
                         <div class="w-more">
-                          <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
+                          <span class="w-ctegory"> {{$row['designation']}}</span> / <span class="w-date">18 Sep. 2018</span>
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -172,8 +176,13 @@
                   </div>
                 </div>
               </div>
+              @endif
+              @endforeach
+              </div>
+        </section>
+      </div>
               <!-------------------- machine 2 ----------------------->
-              <div class="col-md-3">
+          <!--    <div class="col-md-3">
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
                     <div class="work-img">
@@ -196,8 +205,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <!-------------------- machine 2 ----------------------->
+              </div> -->
+              <!-------------------- machine 2 ----------------------
               <div class="col-md-3">
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
@@ -246,7 +255,7 @@
                   </div>
                 </div>
               </div>
-              <!-------------------- machine 2 ----------------------->
+              ------------------ machine 2 ----------------------
               <div class="col-md-3">
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
@@ -272,9 +281,8 @@
                 </div>
 
               </div>
-            </div>
-        </section>
-      </div>
+-->
+         
 
     </div>
   </div>

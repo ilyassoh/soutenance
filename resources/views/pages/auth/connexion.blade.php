@@ -57,7 +57,7 @@
                     </div>
                     <div class="col">
                     <!-- Simple link -->
-                    <a href="{{route('page-oubli-mp')}}">Forgot password?</a>
+                    <a href="#!">Forgot password?</a>
                     </div>
                 </div>
                 <!-- Submit button -->

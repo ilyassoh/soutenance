@@ -9,10 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany ;
 
 class secretaire extends Model
 {
-    public function  publication():HasMany
-{
-    return $this->hasMany(publications::class,'id_secretaire');
-}
+
+
     use HasFactory;
 
     public function publication():HasOne

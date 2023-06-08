@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-
 class type_demande extends Model
 {
     use HasFactory;
@@ -17,6 +16,6 @@ class type_demande extends Model
      */
     public function machine(): BelongsTo
     {
-        return $this->belongsTo(machine::class, 'id_machine', 'id');
+        return $this->belongsTo(Machine::class, 'id_machine', 'id');
     }
 }

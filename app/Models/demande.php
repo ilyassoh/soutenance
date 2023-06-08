@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class demande extends Model
 {
+    
     use HasFactory;
 
-    public function chercheurs():BelongsTo
-{
-    return $this->belongsTo(chercheur::class,'chercheurs_id');
-}
-
+    public function secretaire():BelongsTo
+    {
+        return $this->belongsTo(Secretaire::class, 'id_secretaire', 'id');
+    }
 }

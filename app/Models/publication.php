@@ -9,14 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class publication extends Model
 {
-    public function secretaire():BelongsTo
-{
-    return $this->belongsTo(secretaires::class,'id_secretaire','id');
-}
+    protected $table1 = 'publications';
     use HasFactory;
-
-    public function secretaire():BelongsTo
-    {
-        return $this->belongsTo(Secretaire::class, 'id_secretaire', 'id');
-    }
 }
