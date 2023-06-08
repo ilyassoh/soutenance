@@ -16,7 +16,11 @@
 	<title>CAC | {{$data->nom}}</title>
 </head>
 
+<<<<<<< Updated upstream
 <body onload="showSection(3)">
+=======
+<body onload="showSection(2)">
+>>>>>>> Stashed changes
 <script>
 	// Trigger onchange event when the page is loaded
 	window.addEventListener('DOMContentLoaded', function() {
@@ -314,6 +318,7 @@
 
 			
 			<section class="content" id="section2" style="display:none;">
+<<<<<<< Updated upstream
 				<script>
 					let tasks = [];
 					function addTask() {
@@ -557,10 +562,238 @@
 						</div>
 					</div>
 				</form>
+=======
+			<form action="{{route('demande')}}" method="post" class="row">
+				@csrf
+                <span id="nbrmachines" style="display:none;">{{count($machines)}}</span>
+				<h2 class="text-center text-decoration-underline">Effectuer Une Demande </h2>
+				@if(Session::has('demEnr'))
+					<div class="row my-4">
+						<div class="col-md-2"></div>
+						<div class="col-md-8 bg-success borer border-4 rounded-5">
+							<div class="row text-light fw-bold fs-5">
+								<div class="col-md-8 text-center py-1 px-3">
+									{{Session('demEnr')}}
+								</div>
+								<div class="col-md-4 mt-1">
+									<i onclick="window.location='{{ route('annuler') }}'" class="fa-solid fa-xmark"></i>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+				@endif
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-7">
+						<label for="typedem" class="form-label fw-bold ms-3">Type Demande :</label>
+						<select onchange="handleOptionChangeDemande()" class="form-select" aria-label="Select option" name="typedem" id="typedem" value>
+							<option selected>Select an option</option>
+							@foreach ($typesDemandes as $td)
+							<?php $vv = $td->id.' '.$td->id_machine; ?>
+							<option value="{{$vv}}" {{ old('typedem') === $vv ? 'selected' : '' }}>{{$td->label}}</option>
+								<!-- <option value="{{$td->id.' '.$td->id_machine}}">{{$td->label}}</option> -->
+							@endforeach
+						</select>
+						<span class="text-danger">@error('typedem') {{$message}} @enderror</span>
+					</div>
+					<div class="col-md-3">
+						<?php
+							function isDateReservedForMachine($reservations, $date, $machineId) {
+								foreach ($reservations as $reservation) {
+									if ($reservation['id_machine'] == $machineId && $reservation['datechoix'] == $date) {
+										return true; // La date est réservée pour la machine donnée
+									}
+								}
+								return false; // La date n'est pas réservée pour la machine donnée
+							}
+							$aujourdhui = new DateTime();
+							$unMoisPlusTard = clone $aujourdhui;
+							$unMoisPlusTard->add(new DateInterval('P1M'));
+							$interval = new DateInterval('P1D');
+							$periode = new DatePeriod($aujourdhui, $interval, $unMoisPlusTard);
+						?>
+						<label for="dateChoix" class="form-label fw-bold ms-3">Jour : </label>
+						<select id="mySelect" name="mySelect" class="form-select fw-bold ms-3" onchange="handleOptionChangeDay()">
+							<option value="">Select a day</option>
+							<?php foreach ($periode as $jour) { ?>
+								<option value="{{$jour->format('Y-m-d')}}" {{ old('mySelect') === $jour->format('Y-m-d') ? 'selected' : '' }}>{{$jour->format('Y-m-d');}}</option>
+							<?php  } ?>
+						</select>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-1"></div>
+					<div class="col-md-10 mt-5" id="containerMachines">
+							@foreach ($machines as $m)
+							<div class="row" id="machine{{$m->id}}" style="display:none;">
+								<h3 class="text-center mb-3">{{$m->label}}</h3>
+									<?php
+										// Afficher les jours et les plages horaires
+										foreach ($periode as $jour) {
+									?>
+									<div class="col-md-1"></div>
+									<div class="col-md-10" id="<?php echo 'machine'.$m->id.'day'.$jour->format('Y-m-d')?>" style="display:none;">
+										<div class="row">
+											<span class="col-md-4">{{$jour->format('Y-m-d')}}</span>
+											<?php
+											$plagesHoraires = [ 
+												'08:00 - 10:00',
+												'10:00 - 12:00',
+												'12:00 - 14:00',
+												'14:00 - 16:00'
+											];
+											// Afficher les plages horaires pour chaque jour
+											foreach ($plagesHoraires as $plage) {
+											$res = $jour->format('Y-m-d').' / '.$plage;
+											// echo $res;
+											if (isDateReservedForMachine($reservations,$res,$m->id)){
+											?>
+												<span 
+												class="col-md-2 border rounded-3 bg-secondary text-light fw-bold">{{$plage}}
+												</span>
+											<?php  } else { ?>
+												<span onclick="tokenRDV('<?php echo $res; ?>')"
+												class="col-md-2 border rounded-3 bg-success text-light fw-bold ">{{$plage}}
+												</span>
+											<?php
+											}
+										}
+											?>
+										</div>
+									</div>
+									<div class="col-md-1"></div>
+									<?php } ?>
+							</div>
+							@endforeach
+							<script>
+								function handleOptionChangeDay(){
+									event.preventDefault(); 
+									var e = document.getElementById("typedem");
+									var value = e.options[e.selectedIndex].value;
+									var text = e.options[e.selectedIndex].text;
+									var ev = document.getElementById("mySelect");
+									var v = ev.options[ev.selectedIndex].value;
+									var t = ev.options[ev.selectedIndex].text;
+									nbrmachines = parseInt(document.getElementById('nbrmachines').textContent)
+									var table = [];
+									for (var i = 0; i < 30; i++) {
+										var date = new Date();
+										date.setDate(date.getDate() + i);
+										var year = date.getFullYear();
+										var month = ('0' + (date.getMonth() + 1)).slice(-2);
+										var day = ('0' + date.getDate()).slice(-2);
+										var formattedDate = year + '-' + month + '-' + day;
+										table.push(formattedDate);
+									}
+									for (let i=1; i<=nbrmachines;i++){
+										for (let j=0; j<table.length;j++){
+											document.getElementById('machine'+i+'day'+table[j]).style.display = 'none';
+										}
+									}
+									var parts = value.split(' ');
+									var idDemande = parts[0];
+									var idMachine = parts[1];
+									document.getElementById('machine'+idMachine+'day'+v).style.display = '';
+								}
+								function handleOptionChangeDemande() {	
+									event.preventDefault();
+									var e = document.getElementById("typedem");
+									var value = e.options[e.selectedIndex].value;
+									var parts = value.split(' ');
+									var idDemande = parts[0];
+									var idMachine = parts[1];
+									var text = e.options[e.selectedIndex].text;
+									nbrMachines = document.getElementById('containerMachines').children;
+									// alert(nbrMachines.length-1)
+									for (let i=1;i<=nbrMachines.length-1;i++){
+										document.getElementById('machine'+i).style.display = 'none';
+									}
+									document.getElementById('machine'+idMachine).style.display = '';
+									document.getElementById('idDemande').value = idDemande;
+									r = document.getElementById('rdvContent').value;
+									document.getElementById('dc').value = r;
+
+								}
+								function tokenRDV(rdv){
+									document.getElementById('dc').value = rdv;
+									document.getElementById('rdvContent').value = rdv;
+									document.getElementById('sectionrdvContent').style.display = '';
+								}
+							</script>
+					</div>
+					<div class="col-md-1"></div>
+
+					<div class="row">
+					<div class="col-md-2"></div>
+					<div  id="sectionrdvContent" class="col-md-8 mt-5" style="display:none;">
+						<div class="row">
+							<div class="col-md-2"></div>
+							<div class="col-md-8">
+								<input id="rdvContent" type="text" class="form-control fw-bold ms-3 w-100 text-center" disabled>
+							</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-4"></div>
+							<div class="col-md-4">
+								<a id="btnLastPart" href="#" class="mt-3 w-100 btn btn-primary" 
+								onclick="document.getElementById('lastPart').style.display='' ">Suivant</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2"></div>
+					<div class="row mt-3" id="lastPart" style="display:none;">
+						<input type="text" name="idUser" id="idUser" value="{{$data->id}}" style="display:none;">
+						<input type="number" name="idDemande" id="idDemande" style="display:none;">
+						<input type="text" name="dc" id="dc" style="display:none;">
+						<div class="col-md-1"></div>
+						<div class="col-md-5 my-2">
+							<label for="prenom" class="form-label fw-bold ms-3">Nombre Echantillons : </label>
+							<input type="number" class="form-control border border-dark" name="nbrEchan">
+							<span class="text-danger">@error('nbrEchan') {{$message}} @enderror</span>
+						</div>
+						<div class="col-md-5 my-2">
+							<label for="prenom" class="form-label fw-bold ms-3">Nombre Répétitions : </label>
+							<input type="number" class="form-control border border-dark" name="nbrRep">
+							<span class="text-danger">@error('nbrRep') {{$message}} @enderror</span>
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-1"></div>
+						<div class="col-md-5 my-2">
+							<label for="prenom" class="form-label fw-bold ms-3">Nature Echantillons : </label>
+							<select class="form-select" aria-label="Nature Echantillons" name="natureEcha" id="natureEcha">
+								<option selected>Nature Echantillons !</option>
+								<option value="Agile"> Agile </option>
+								<option value="Phosphate"> Phosphate </option>
+								<option value="Oxyde"> Oxyde </option>
+								<option value="Silicate"> Silicate </option>
+								<option value="Cellulose"> Cellulose </option>
+								<option value="Polymere"> Polymere </option>
+							</select>
+							<span class="text-danger">@error('natureEcha') {{$message}} @enderror</span>
+						</div>
+						<div class="col-md-5 my-2">
+							<label for="prenom" class="form-label fw-bold ms-3">Toxicité : </label>
+							<select class="form-select" aria-label="Selectionner Toxicité !" name="toxicite" id="toxicite">
+								<option selected>Toxicité !</option>
+								<option value="Toxiques">Toxiques </option>
+								<option value="Non Toxiques">Non Toxiques </option>
+								<option value="Radioactifs">Radioactifs </option>
+							</select>
+							<span class="text-danger">@error('toxicite') {{$message}} @enderror</span>
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<button type="submit" class="btn btn-primary w-100 mt-3">Envoyer</button>
+						</div>
+					</div>
+				</div>
+			</form>
+>>>>>>> Stashed changes
 			</section>
 
 
 			<main class="content" id="section3" style="display:none;">
+<<<<<<< Updated upstream
 				@if (count($demandes)<=0)
 					<div class="container text-center">
 						<h3 class="text-secondary">Pas de demande</h3>
@@ -588,6 +821,10 @@
 					</tbody>
 				</table>
 				@endif
+=======
+			<!-- Your Unique Registration Number is: 6497011325 -->
+				
+>>>>>>> Stashed changes
 			</main>
 
 

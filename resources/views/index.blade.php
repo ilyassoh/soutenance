@@ -19,7 +19,11 @@
 </head>
 <body>
     @include('partitions.header')
+<<<<<<< Updated upstream
     @include('pages.home.home', ['data1' => $data1, 'data2' => $data2])
+=======
+    @include('pages.home.home') 
+>>>>>>> Stashed changes
     @include('pages.home.sponsors')
     @include('partitions.footer')
 
