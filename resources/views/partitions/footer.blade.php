@@ -22,7 +22,7 @@
         <div class="col-md-4 mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3 text-secondary"></i>Company name
+            <i class="fas fa-gem me-3 text-secondary"></i>name
           </h6>
           <p>
             Here you can use rows and columns to organize your footer content. Lorem ipsum
@@ -35,7 +35,7 @@
         <div class="col-md-3 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-            Products
+            Nos Pages
           </h6>
           <p>
 
@@ -43,18 +43,16 @@
           </p>
           <p>
             <a href="{{ route('recherches') }}" class="text-reset">Recherches</a>
+          </p>
+           <p>
+            <a href="{{ route('media') }}" class="text-reset">Media</a>
+          </p>
+          <p>
+            <a href="{{ route('actualite') }}" class="text-reset">Actualite</a>
 
-            <a href="#!" class="text-reset">Angular</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">React</a>
-
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Vue</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Laravel</a>
+            <a href="{{ route('apropos') }}" class="text-reset">a propos</a>
           </p>
         </div>
         <!-- Grid column -->
@@ -63,20 +61,18 @@
         <div class="col-md-2 mx-auto mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-            Useful links
+            DES LIENS UTILES
           </h6>
           <p>
-            <a href="#!" class="text-reset">Pricing</a>
+            <a href="{{ route('contact') }}" class="text-reset">CONTACT NOUS </a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Settings</a>
+            <a href="{{ route('connexion') }}" class="text-reset">CONNEXION</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Orders</a>
+            <a href="{{ route('inscription') }}" class="text-reset">INSCRIPTION</a>
           </p>
-          <p>
-            <a href="#!" class="text-reset">Help</a>
-          </p>
+         
         </div>
         <!-- Grid column -->
 

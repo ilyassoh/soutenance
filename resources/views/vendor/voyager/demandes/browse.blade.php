@@ -47,17 +47,15 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">id</th>
-            <th scope="col">date</th>
-            <th scope="col">chercheur</th>
-            <th scope="col">demande PDF</th>
-            <th scope="col">Statu</th>
-            <th scope="col">Action</th>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
         </tr>
     </thead>
     <tbody>
-    @foreach($demandes as $demande)
         <tr>
+
             <th scope="row">{{$demande->id}}</th>
             <td>{{$demande->date_choix}}</td>
             <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
@@ -81,20 +79,15 @@ $s = "Rejeté";
     <button onclick="document.getElementById('idR').value = <?php echo $demande->id ; ?> ;
     document.getElementById('updateForm1').submit()" class="btn btn-danger">Refuser</button>
     </td>
+
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+
         </tr>
-    @endforeach
     </tbody>
 </table>
-
-<form id="updateForm" method="POST" action="{{ route('accepter-demande') }}" style="display:none">
-    @csrf
-    <input id="idDTU" name="idDTU" type="number">
-</form>
-<form id="updateForm1" method="POST" action="{{ route('refuser-demande') }}" style="display:none">
-    @csrf
-    <input id="idR" name="idR" type="number">
-</form>
-
 
 @else
 <li class="nav-item">
@@ -421,7 +414,10 @@ $s = "Rejeté";
 
     var deleteFormAction;
     $('td').on('click', '.delete', function(e) {
-        $('#delete_form')[0].action = '{{ route('voyager.'.$dataType->slug.'.destroy', '__id ') }}'.replace('__id', $(this).data('id'));
+        $('#delete_form')[0].action = '{{ route('
+        voyager.
+        '.$dataType->slug.'.destroy ', '
+        __id ') }}'.replace('__id', $(this).data('id'));
         $('#delete_modal').modal('show');
     });
 
@@ -438,9 +434,15 @@ $s = "Rejeté";
     $(function() {
         $('#show_soft_deletes').change(function() {
             if ($(this).prop('checked')) {
-                $('#dataTable').before('<a id="redir" href="{{ (route('voyager.'.$dataType->slug.'.index ', array_merge($params, ['showSoftDeleted ' => 1]), true)) }}"></a>');
+                $('#dataTable').before('<a id="redir" href="{{ (route('
+                    voyager.
+                    '.$dataType->slug.'.index ', array_merge($params, ['
+                    showSoftDeleted ' => 1]), true)) }}"></a>');
             } else {
-                $('#dataTable').before('<a id="redir" href="{{ (route('voyager.'.$dataType->slug.'.index ', array_merge($params, ['showSoftDeleted ' => 0]), true)) }}"></a>');
+                $('#dataTable').before('<a id="redir" href="{{ (route('
+                    voyager.
+                    '.$dataType->slug.'.index ', array_merge($params, ['
+                    showSoftDeleted ' => 0]), true)) }}"></a>');
             }
 
             $('#redir')[0].click();

@@ -8,14 +8,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class machine extends Model
 {
+
+    protected $table2='machines';
+
     use HasFactory;
-
-     /**
-     * Get the type_demande that hasOne machine .
-     */
-    public function type_demande(): HasOne
-    {
-        return $this->hasOne(type_demande::class, 'id_machine');
-    }
-
+    
 }
