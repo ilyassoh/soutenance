@@ -40,18 +40,15 @@
 
 
 
-<<<<<<< Updated upstream
 @if ( auth()->user()->role->display_name == 'Directeur')
-=======
-@if ( auth()->user()->role->display_name == 'Derecteur')
->>>>>>> Stashed changes
+
 <li class="nav-item">
     <h1>this is directeur page </h1>
 </li>
 <table class="table table-striped">
     <thead>
         <tr>
-<<<<<<< Updated upstream
+
             <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>
@@ -67,36 +64,7 @@
 
 
     <td ><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
-=======
-            <th scope="col">id</th>
-            <th scope="col">date</th>
-            <th scope="col">chercheur</th>
-            <th scope="col">demande PDF</th>
-            <th scope="col">Statu</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach($demandes as $demande)
-        <tr>
-            <th scope="row">{{$demande->id}}</th>
-            <td>{{$demande->date_choix}}</td>
-            <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
- @php  
-$string = $demande->rapport;
-$string = str_replace('\\', '/', $string);
-$string = str_replace('[', '', $string);
-$string = str_replace(']', '', $string);
 
-$obj = json_decode($string);
-
-$download_link = $obj->download_link;
-$original_name = $obj->original_name;
-@endphp
-
-
-    <td ><a href="{{ asset('storage/'. $download_link) }}">{{$original_name}}</a></td>
->>>>>>> Stashed changes
 @php
 if($demande->statu == 'NC')
 $s = "Non Confirmé";
@@ -114,7 +82,6 @@ $s = "Rejeté";
     <button onclick="document.getElementById('idR').value = <?php echo $demande->id ; ?> ;
     document.getElementById('updateForm1').submit()" class="btn btn-danger">Refuser</button>
     </td>
-<<<<<<< Updated upstream
 
             <th scope="row">1</th>
             <td>Mark</td>
@@ -125,7 +92,7 @@ $s = "Rejeté";
     </tbody>
 </table>
 
-=======
+
         </tr>
     @endforeach
     </tbody>
@@ -141,7 +108,7 @@ $s = "Rejeté";
 </form>
 
 
->>>>>>> Stashed changes
+
 @else
 <li class="nav-item">
     <h1>this is Admin page </h1>
@@ -467,14 +434,9 @@ $s = "Rejeté";
 
     var deleteFormAction;
     $('td').on('click', '.delete', function(e) {
-<<<<<<< Updated upstream
-        $('#delete_form')[0].action = '{{ route('
-        voyager.
-        '.$dataType->slug.'.destroy ', '
-        __id ') }}'.replace('__id', $(this).data('id'));
-=======
+
         $('#delete_form')[0].action = '{{ route('voyager.'.$dataType->slug.'.destroy', '__id ') }}'.replace('__id', $(this).data('id'));
->>>>>>> Stashed changes
+
         $('#delete_modal').modal('show');
     });
 
@@ -491,21 +453,10 @@ $s = "Rejeté";
     $(function() {
         $('#show_soft_deletes').change(function() {
             if ($(this).prop('checked')) {
-<<<<<<< Updated upstream
-                $('#dataTable').before('<a id="redir" href="{{ (route('
-                    voyager.
-                    '.$dataType->slug.'.index ', array_merge($params, ['
-                    showSoftDeleted ' => 1]), true)) }}"></a>');
-            } else {
-                $('#dataTable').before('<a id="redir" href="{{ (route('
-                    voyager.
-                    '.$dataType->slug.'.index ', array_merge($params, ['
-                    showSoftDeleted ' => 0]), true)) }}"></a>');
-=======
                 $('#dataTable').before('<a id="redir" href="{{ (route('voyager.'.$dataType->slug.'.index ', array_merge($params, ['showSoftDeleted ' => 1]), true)) }}"></a>');
             } else {
                 $('#dataTable').before('<a id="redir" href="{{ (route('voyager.'.$dataType->slug.'.index ', array_merge($params, ['showSoftDeleted ' => 0]), true)) }}"></a>');
->>>>>>> Stashed changes
+
             }
 
             $('#redir')[0].click();

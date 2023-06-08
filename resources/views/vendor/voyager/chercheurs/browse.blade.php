@@ -40,11 +40,9 @@
 
 
 
-<<<<<<< Updated upstream
+
 @if ( auth()->user()->role->display_name == 'Directeur')
-=======
-@if ( auth()->user()->role->display_name == 'Derecteur')
->>>>>>> Stashed changes
+
 <li class="nav-item">
     <h1>this is directeur page </h1>
 </li>
