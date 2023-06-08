@@ -1,0 +1,46 @@
+.carsoul {
+  color: white;
+  padding: 10%  15% ;
+  background-image: url("../imgs/backLab1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+.carsoul p , .carsoul span{
+  margin-left: 1%;
+}
+.carsoul p b{
+  font-size: 25px;
+}
+
+.machines{
+  width: 80%;
+  margin: 3% 10%;
+}
+.machines div:first-child ,.machines div:last-child{
+  margin-top: 6%;
+}
+
+
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  .carsoul {
+    padding: 10% 3%;
+    background-position-x: center;
+  }
+  .carsoul p{
+    width: 60%;
+  }
+  .row img{
+    width: 90%;
+    margin-left: 5%;
+  }
+}
+@media screen and (max-width: 990px) {
+  #pecB{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+}

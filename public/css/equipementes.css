@@ -1,0 +1,25 @@
+#img_equip {
+    /* padding: 10% 15%; */
+    background-image: url('../imgs/eqpm2.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* background-size: contain; */
+    width: 100vw;
+    height: 530px;
+    object-fit: cover; 
+}
+.img_title{
+    padding-left: 50%;
+
+}
+
+.accordion-button{
+    background-color: #4492eb;
+    border-radius: 15px;
+    color: white;
+
+}
+
+#lab{
+    cursor: pointer;
+}
