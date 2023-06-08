@@ -78,9 +78,9 @@ class CherAuthController extends Controller
         if ($res){
             // Enregistrement avec succès
             session(['emailInscrit' => $request->email]);
-            Mail::to($request->email)->send(new sendCodeMail($request->email,$code,$request->nom));
-            return view('pages.auth.email_verification');
-            // return redirect('connexion');
+            // Mail::to($request->email)->send(new sendCodeMail($request->email,$code,$request->nom));
+            // return view('pages.auth.email_verification');
+            return redirect('connexion');
             //return $code;
         }
         else {

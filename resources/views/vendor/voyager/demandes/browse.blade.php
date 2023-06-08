@@ -40,7 +40,7 @@
 
 
 
-@if ( auth()->user()->role->display_name == 'Derecteur')
+@if ( auth()->user()->role->display_name == 'Directeur')
 <li class="nav-item">
     <h1>this is directeur page </h1>
 </li>
@@ -61,20 +61,9 @@
             <th scope="row">{{$demande->id}}</th>
             <td>{{$demande->date_choix}}</td>
             <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
- @php  
-$string = $demande->rapport;
-$string = str_replace('\\', '/', $string);
-$string = str_replace('[', '', $string);
-$string = str_replace(']', '', $string);
-
-$obj = json_decode($string);
-
-$download_link = $obj->download_link;
-$original_name = $obj->original_name;
-@endphp
 
 
-    <td ><a href="{{ asset('storage/'. $download_link) }}">{{$original_name}}</a></td>
+    <td ><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
 @php
 if($demande->statu == 'NC')
 $s = "Non Confirmé";

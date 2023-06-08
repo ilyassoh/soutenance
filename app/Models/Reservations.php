@@ -12,7 +12,7 @@ class Reservations extends Model
 
     protected $fillable = [
         'id',
-        'datechoix',
-        'id_machine',
+        'rdv',
+        'machines_id',
     ];
 }

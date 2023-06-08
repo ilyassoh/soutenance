@@ -8,6 +8,8 @@ use App\Models\Machine;
 use App\Models\Reservations;
 use App\Models\Demandes;
 use App\Models\typeDemande;
+use App\Models\Structures;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Dompdf\Dompdf;
@@ -69,6 +71,9 @@ class demandeControlleur extends Controller
                 $templateProcessor->setValue('etablissement', $chercheur->etablissement);
                 if ($request->solsEtSediments != ""){
                     $templateProcessor->setValue('solsEtSediments', 'Sols et Sédiments, ');
+                }
+                else {
+                    $templateProcessor->setValue('solsEtSediments', '');
                 }
                 if ($request->Polymeres != ""){
                     $templateProcessor->setValue('Polymeres', 'Polymerès, ');
@@ -168,20 +173,23 @@ class demandeControlleur extends Controller
                 }
 
                 // Stocker Demande
+                $str = Structures::where('id','=',$chercheur->structures_id)->first();
+                $dir = User::where('id','=',$str->users_id)->first();
                 $demande = new Demandes();
                 $demande->chercheurs_id = $request->idUser ;
                 $demande->type_demandes_id = $request->idDemande ;
                 $demande->statu = 'NC' ;
                 $demande->date_choix = $request->dc ;
                 $demande->rapport = 'Pas de Rapport' ;
-                $demande->users_id = '1' ;
+                $demande->directeurs_id = $dir->id ;
+                $demande->secretaires_id = 1 ;
                 $demande->fword = '';
                 $demande->save();
                 $demande->fword = $demande->id.'_'.$td->fichier_word ;
                 $demande->save();
                 $reservation = new Reservations();
-                $reservation->datechoix = $request->dc ;
-                $reservation->id_machine = $td->machines_id ;
+                $reservation->rdv = $request->dc ;
+                $reservation->demandes_id = $demande->id ;
                 $reservation->save();
 
                 // Envoyer email 
