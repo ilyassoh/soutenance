@@ -195,7 +195,7 @@ class demandeControlleur extends Controller
                 // Envoyer email 
                 $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
                 $templateProcessor->saveAs($modifiedPath);
-                // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($chercheur->id.''.$td->fichier_word));
+                Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($chercheur->id.'_'.$td->fichier_word));
                 session(['demEnr' => 'Demande Effectué Avec Succès !']); 
                 break ;
             // *******************************************************************
@@ -668,7 +668,7 @@ class demandeControlleur extends Controller
                 // Envoyer email 
                 $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
                 $templateProcessor->saveAs($modifiedPath);
-                // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($chercheur->id.''.$td->fichier_word));
+                Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($chercheur->id.''.$td->fichier_word));
                 session(['demEnr' => 'Demande Effectué Avec Succès !']); 
                 break ;
 

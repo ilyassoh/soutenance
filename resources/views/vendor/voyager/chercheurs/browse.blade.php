@@ -43,7 +43,7 @@
 
 @if ( auth()->user()->role->display_name == 'Directeur')
 
-<li class="nav-item">
+<li class="nav-item">-
     <h1>this is directeur page </h1>
 </li>
 <table class="table table-striped">

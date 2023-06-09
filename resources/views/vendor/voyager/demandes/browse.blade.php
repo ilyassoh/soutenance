@@ -73,6 +73,8 @@
             if($demande->statu == 'C')
             $s = "Confirmé";
             if($demande->statu == 'R')
+            $s = "Réalisé";
+            if($demande->statu == 'D')
             $s = "Rejeté";
             @endphp
             <td>{{$s}}</td>
@@ -85,11 +87,9 @@
                 <button onclick="document.getElementById('idR').value = <?php echo $demande->id; ?> ;
     document.getElementById('updateForm1').submit()" class="btn btn-danger">Refuser</button>
             </td>
-
-
-    </tbody>
-</table>
 </tr>
+
+
 @endforeach
 </tbody>
 </table>
@@ -117,13 +117,12 @@
             <th scope="col">fword</th>
             <th scope="col">statu</th>
             <th scope="col">Action</th>
-
         </tr>
     </thead>
     <tbody>
         
         @foreach($demandes as $demande)
-        @if(!($demande->statu == 'P' || $demande->statu == 'NC') )
+        @if(!($demande->statu == 'D' || $demande->statu == 'NC') )
         <tr>
             <th scope="row">{{$demande->id}}</th>
             <td>{{$demande->date_choix}}</td>
@@ -133,12 +132,8 @@
             <td><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
 
             @php
-            if($demande->statu == 'P')
-            $s = "En attente ...";
             if($demande->statu == 'C')
             $s = "Confirme";
-            if($demande->statu == 'NC')
-            $s = "Non Confirme";
             if($demande->statu == 'R')
             $s = "Realise";
             if($demande->statu == 'NR')
@@ -500,12 +495,7 @@
 
     var deleteFormAction;
     $('td').on('click', '.delete', function(e) {
-
-        $('#delete_form')[0].action = '{{ route('
-        voyager.
-        '.$dataType->slug.'.destroy ', '
-        __id ') }}'.replace('__id', $(this).data('id'));
-
+        $('#delete_form')[0].action = '{{ route('voyager.'.$dataType->slug.'.destroy', '__id ') }}'.replace('__id', $(this).data('id'));
         $('#delete_modal').modal('show');
     });
 

@@ -226,7 +226,7 @@ class demandeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
     public function refuserDemande(Request $request){
         $demande = demande::where('id','=',$request->idR)->first();
         if ($demande){
-            $demande->statu = 'NC' ;
+            $demande->statu = 'D' ;
             $demande->save();
         }
         return back();

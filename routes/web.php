@@ -7,6 +7,7 @@ use App\Http\Controllers\mediaController;
 use App\Http\Controllers\rechercheController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\afficheMachine;
+use App\Http\Controllers\demandeControlleur;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\Voyager\demandeController;
@@ -129,7 +130,7 @@ Route::post('/remove-imageProfile-chercheur',[CherAuthController::class,'removeI
 
 
 // Effectuer une demande 
-Route::post('/demande',[CherAuthController::class,'effectuerDemande'])->name('demande');
+Route::post('/demande',[demandeControlleur::class,'effectuerDemande'])->name('demande');
 
 
 Route::post('/connexion-secretaire',[secrAuthController::class,'connexionChercheur'])->name('connexion-secretaire');
