@@ -57,11 +57,7 @@
                     </div>
                     <div class="col">
                     <!-- Simple link -->
-<<<<<<< Updated upstream
-                    <a href="#!">Forgot password?</a>
-=======
                     <a href="{{route('page-oubli-mp')}}">Forgot password?</a>
->>>>>>> Stashed changes
                     </div>
                 </div>
                 <!-- Submit button -->

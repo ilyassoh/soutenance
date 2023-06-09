@@ -48,12 +48,6 @@ class PubController extends Controller
      * @param  \App\Models\pub  $pub
      * @return \Illuminate\Http\Response
      */
-    public function show(pub $pub)
-    {
-        $data=publication::all() ;
-        return view("pages.actualite.actualite",compact('data'));
-        //return view('pages.actualite.actualite')->with('data', $data);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -61,10 +55,6 @@ class PubController extends Controller
      * @param  \App\Models\pub  $pub
      * @return \Illuminate\Http\Response
      */
-    public function edit(pub $pub)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -73,19 +63,4 @@ class PubController extends Controller
      * @param  \App\Models\pub  $pub
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatepubRequest $request, pub $pub)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\pub  $pub
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(pub $pub)
-    {
-        //
-    }
 }

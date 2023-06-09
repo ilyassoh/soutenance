@@ -71,7 +71,7 @@
 if($chercheur->is_verified == '0')
 $s = "Non";
 if($chercheur->is_verified == '1')
-$s = "OUI";;
+$s = "OUI";
 @endphp
     <td>{{$s}}</td>
 

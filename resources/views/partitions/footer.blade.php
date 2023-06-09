@@ -22,11 +22,7 @@
         <div class="col-md-4 mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
-<<<<<<< Updated upstream
             <i class="fas fa-gem me-3 text-secondary"></i>name
-=======
-            <i class="fas fa-gem me-3 text-secondary"></i>Company name
->>>>>>> Stashed changes
           </h6>
           <p>
             Here you can use rows and columns to organize your footer content. Lorem ipsum
@@ -39,11 +35,7 @@
         <div class="col-md-3 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-<<<<<<< Updated upstream
             Nos Pages
-=======
-            Products
->>>>>>> Stashed changes
           </h6>
           <p>
 
@@ -51,7 +43,6 @@
           </p>
           <p>
             <a href="{{ route('recherches') }}" class="text-reset">Recherches</a>
-<<<<<<< Updated upstream
           </p>
            <p>
             <a href="{{ route('media') }}" class="text-reset">Media</a>
@@ -62,20 +53,6 @@
           </p>
           <p>
             <a href="{{ route('apropos') }}" class="text-reset">a propos</a>
-=======
-
-            <a href="#!" class="text-reset">Angular</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">React</a>
-
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Vue</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Laravel</a>
->>>>>>> Stashed changes
           </p>
         </div>
         <!-- Grid column -->
@@ -84,7 +61,6 @@
         <div class="col-md-2 mx-auto mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-<<<<<<< Updated upstream
             DES LIENS UTILES
           </h6>
           <p>
@@ -97,22 +73,6 @@
             <a href="{{ route('inscription') }}" class="text-reset">INSCRIPTION</a>
           </p>
          
-=======
-            Useful links
-          </h6>
-          <p>
-            <a href="#!" class="text-reset">Pricing</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Settings</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Orders</a>
-          </p>
-          <p>
-            <a href="#!" class="text-reset">Help</a>
-          </p>
->>>>>>> Stashed changes
         </div>
         <!-- Grid column -->
 

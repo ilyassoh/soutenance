@@ -23,11 +23,11 @@
     <div class="container mt-2">
         <div class="row">
             <div class="col-md-4"></div>
-<<<<<<< Updated upstream
-            <form class="col-md-4" action="" method="POST">
-=======
             <form class="col-md-4" action="{{route('validate-code-email')}}" method="POST">
                 @csrf
+                <div class="text-center">
+                    <img src="{{url('imgs/cac.png')}}" width="200" class="d-inline-block align-top rounded-3" alt="Bootstrap" loading="lazy">
+                </div>
                 @if(Session::has('invalideCode'))
                     <div class="alert alert-danger">{{session('invalideCode')}}</div>
                 @endif
@@ -37,28 +37,8 @@
                 @if(Session::has('invalideEmail'))
                     <div class="alert alert-danger">{{session('invalideEmail')}}</div>
                 @endif
->>>>>>> Stashed changes
-                <div class="text-center">
-                    <img src="{{url('imgs/cac.png')}}" width="200" class="d-inline-block align-top rounded-3" alt="Bootstrap" loading="lazy">
-                </div>
                 <!-- Email input -->
                 <div class="form-outline mb-2">
-<<<<<<< Updated upstream
-                    <label class="form-label fw-bold ms-2" for="form2Example1">Entrer le Code de validation : </label>
-                    <input type="email" id="form2Example1" class="form-control"  required/>
-                </div>
-                <!-- Submit button -->
-                <div class="row text-center mt-5">
-                    <div class="col-md-4"></div>
-                    <button type="button" class="col-md-4 btn btn-primary btn-block mb-2">Sign in</button>
-                    <div class="col-md-4"></div>
-                </div>
-                <!-- Register buttons -->
-                <div class="text-center mt-4">
-                    <p>Pas de Message ? <a href="{{route('inscription')}}">Re_envoyer</a></p>
-                </div>
-            </form>
-=======
                     <label class="form-label fw-bold ms-2" for="code">Entrer le Code de validation : </label>
                     <input type="text" id="code" class="form-control" name="code" value="{{old('code')}}"  required/>
                     <span class="text-danger">@error('email') {{$message}} @enderror</span>
@@ -79,7 +59,6 @@
                         <button type="submit" class="btn btn-secondary">Renvoyer Code</button>
                     </form>
             </div>
->>>>>>> Stashed changes
             <div class="col-md-4"></div>
         </div>
     </div>

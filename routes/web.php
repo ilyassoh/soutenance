@@ -34,9 +34,7 @@ use Illuminate\Support\Facades\Auth;
 //Route::get('/',[HomeController::class,'index'])->name('index-page');
 
 Route::get('/',[HomeController::class,'index'])->name('index-page');
-Route::get('/', function () {
-    return view('index');
-})->name('index-page');
+
 
 
 // Route de page d'actualite 
@@ -48,12 +46,21 @@ Route::get('/actualite',[PubController::class,'index'])->name('actualite');
 // Route de page d'equipements
 Route::get('/equipements',[afficheMachine::class,'equipements'])->name('equipements');
 
+Route::post('/verifier-chercheur',[chercheurController::class,'verifierChercheur'])->name('verifier-chercheur');
+
+Route::get('/recherches',[rechercheController::class,'index'])->name('recherches');
+
+Route::get('/media',[mediaController::class,'index'])->name('media');
+
+//Demande 
+
 Route::post('/accepter-demande',[demandeController::class,'accepterDemande'])->name('accepter-demande');
 
 Route::post('/refuser-demande',[demandeController::class,'refuserDemande'])->name('refuser-demande');
 
-Route::post('/verifier-chercheur',[chercheurController::class,'verifierChercheur'])->name('verifier-chercheur');
+Route::post('/Realise-demande',[demandeController::class,'RealiseDemande'])->name('Realise-demande');
 
+Route::post('/Non_Realise-demande',[demandeController::class,'Non_RealiseDemande'])->name('Non_Realise-demande');
 
 
 
@@ -62,10 +69,7 @@ Route::get('/machine-details', function (){
     return view('pages.equipements.machine-details');
 })->name('machine-details');
 
-// Route de page des recherches
-Route::get('/recherches', function (){
-    return view('pages.recherches.recherches');
-})->name('recherches');
+
 
 // Route de page a propos
 Route::get('/apropos', function (){
@@ -77,10 +81,6 @@ Route::get('/contact', function (){
     return view('pages.contact.contact');
 })->name('contact');
 
-// Route de page media 
-Route::get('/media', function (){
-    return view('pages.media.media');
-})->name('media');
 
 
 // Route de connection 

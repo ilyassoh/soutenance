@@ -232,6 +232,24 @@ class demandeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
         return back();
     }
 
+    public function RealiseDemande(Request $request){
+        $demande = demande::where('id','=',$request->idDTU)->first();
+        if ($demande){
+            $demande->statu = 'R' ;
+            $demande->save();
+        }
+        return back();
+    }
+
+    public function Non_RealiseDemande(Request $request){
+        $demande = demande::where('id','=',$request->idR)->first();
+        if ($demande){
+            $demande->statu = 'NR' ;
+            $demande->save();
+        }
+        return back();
+    }
+
     //***************************************
     //                _____
     //               |  __ \

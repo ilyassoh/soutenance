@@ -23,7 +23,6 @@
         <script>
             document.getElementById('media').setAttribute('id','activeLink')
         </script>
-<<<<<<< Updated upstream
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-mdb-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active ">
@@ -40,22 +39,12 @@
     </div>
   </div>
 </div>
-=======
-      <div >
-           <div class="firstMedia_img" width="150px" >  
-		  <span >
-		  <button  id="btn-media" type="button" class="btn btn-light">media</button>
-		  </span>   
-           </div>
-      </div>
->>>>>>> Stashed changes
 
  <section class="gallery-block cards-gallery">
 	    <div class="container">
 	        <div class="heading">
 	          <h2>MEDIA</h2>
 	        </div>
-<<<<<<< Updated upstream
 			
 	        <div class="row">
 			@foreach ($data as $media)
@@ -77,21 +66,6 @@
 	</div>
  </section>
 	           <!-- <div class="col-md-6 col-lg-4">
-=======
-	        <div class="row">
-	            <div class="col-md-6 col-lg-4">
-	                <div class="card border-0 transform-on-hover">
-	                	<a class="lightbox" href="../img/image1.jpg">
-	                		<img src="{{URL('imgs/actualite1.jpg')}}"  alt="Card Image" class="card-img-top">
-	                	</a>
-	                    <div class="card-body">
-	                        <h6><a href="#">Lorem Ipsum</a></h6>
-	                        <p class="text-muted card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna.</p>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-md-6 col-lg-4">
->>>>>>> Stashed changes
 	                <div class="card border-0 transform-on-hover">
 						<a class="lightbox" href="../img/image2.jpg">
 		                	<img src="{{URL('imgs/actualite1.jpg')}}" alt="Card Image" class="card-img-top">
@@ -185,13 +159,8 @@
 	            </div>
 	                 
 	        
-<<<<<<< Updated upstream
 </div> -->
     
-=======
-</div>
-    </section>
->>>>>>> Stashed changes
   
    <script>
         baguetteBox.run('.cards-gallery', { animation: 'slideIn'});
@@ -204,7 +173,6 @@
 
 <div class="container ">
 <div class="heading" id="pictures">
-<<<<<<< Updated upstream
 	      <h2>Gallerie de nos media</h2>
   </div>
   
@@ -222,16 +190,6 @@
 
 </div>
 <!--
-=======
-	      <h2>Our labos pictures</h2>
-  </div>
- <div class="row">
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-        <a href="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="fancybox" rel="ligthbox">
-            <img  src="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="zoom img-fluid "  alt=""> 
-        </a>
-    </div>
->>>>>>> Stashed changes
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
         <a href="https://images.pexels.com/photos/38238/maldives-ile-beach-sun-38238.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"  class="fancybox" rel="ligthbox">
             <img  src="https://images.pexels.com/photos/38238/maldives-ile-beach-sun-38238.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="zoom img-fluid"  alt="">
@@ -276,10 +234,7 @@
      
  </div>
 </div>
-<<<<<<< Updated upstream
 -->
-=======
->>>>>>> Stashed changes
 
         @include('partitions.footer')
 </body>

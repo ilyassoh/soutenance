@@ -11,12 +11,12 @@ class demande extends Controller
     public function index()
     {
         // Get the currently authenticated user...
-        $user = Auth::user();
-        $id = Auth::id();
+        // $user = Auth::user();
+        // $id = Auth::id();
 
-        dd($user->role['display_name']);
+        // dd($user->role['display_name']);
 
-        $demande = demande::where('3', $user)->get();
-        return view('vendor.voyager.demandest.browse', compact('demandest'));
+        // $demande = demande::where('3', $user)->get();
+        // return view('vendor.voyager.demandest.browse', compact('demandest'));
     }
 }

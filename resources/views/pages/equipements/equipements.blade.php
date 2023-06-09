@@ -111,10 +111,7 @@
           <div class="container">
             <div class="row">
               @foreach($machine as $row)
-<<<<<<< Updated upstream
               @if( $row['local'] =='radio1')
-=======
->>>>>>> Stashed changes
               <!-------------------- machine 1 ----------------------->
               <div class="col-sm-3">
                 <div class="work-box">
@@ -142,10 +139,7 @@
                   </div>
                 </div>
               </div>
-<<<<<<< Updated upstream
               @endif
-=======
->>>>>>> Stashed changes
               @endforeach
             </div>
         </section>
@@ -156,11 +150,8 @@
           <div class="container">
             <div class="row">
               <!-------------------- machine 1 ----------------------->
-<<<<<<< Updated upstream
               @foreach($machine as $row)
                @if( $row['local'] =='radio2')
-=======
->>>>>>> Stashed changes
               <div class="col-sm-3">
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
@@ -171,15 +162,9 @@
                   <div class="work-content">
                     <div class="row">
                       <div class="col-sm-8">
-<<<<<<< Updated upstream
                         <h2 class="w-title"> {{$row['label']}}</h2>
                         <div class="w-more">
                           <span class="w-ctegory"> {{$row['designation']}}</span> / <span class="w-date">18 Sep. 2018</span>
-=======
-                        <h2 class="w-title">Machine 1</h2>
-                        <div class="w-more">
-                          <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
->>>>>>> Stashed changes
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -191,7 +176,6 @@
                   </div>
                 </div>
               </div>
-<<<<<<< Updated upstream
               @endif
               @endforeach
               </div>
@@ -199,10 +183,6 @@
       </div>
               <!-------------------- machine 2 ----------------------->
           <!--    <div class="col-md-3">
-=======
-              <!-------------------- machine 2 ----------------------->
-              <div class="col-md-3">
->>>>>>> Stashed changes
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
                     <div class="work-img">
@@ -225,13 +205,8 @@
                     </div>
                   </div>
                 </div>
-<<<<<<< Updated upstream
               </div> -->
               <!-------------------- machine 2 ----------------------
-=======
-              </div>
-              <!-------------------- machine 2 ----------------------->
->>>>>>> Stashed changes
               <div class="col-md-3">
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
@@ -280,11 +255,7 @@
                   </div>
                 </div>
               </div>
-<<<<<<< Updated upstream
               ------------------ machine 2 ----------------------
-=======
-              <!-------------------- machine 2 ----------------------->
->>>>>>> Stashed changes
               <div class="col-md-3">
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
@@ -310,14 +281,8 @@
                 </div>
 
               </div>
-<<<<<<< Updated upstream
 -->
          
-=======
-            </div>
-        </section>
-      </div>
->>>>>>> Stashed changes
 
     </div>
   </div>

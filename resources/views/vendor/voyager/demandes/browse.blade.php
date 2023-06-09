@@ -48,54 +48,50 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <th scope="col">id</th>
+            <th scope="col">date_choix</th>
+            <th scope="col">chercheur</th>
+            <th scope="col">fword</th>
+            <th scope="col">statu</th>
+            <th scope="col">Action</th>
 
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
         </tr>
     </thead>
     <tbody>
+        @foreach($demandes as $demande)
         <tr>
-
             <th scope="row">{{$demande->id}}</th>
             <td>{{$demande->date_choix}}</td>
             <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
 
 
-    <td ><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
+            <td><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
 
-@php
-if($demande->statu == 'NC')
-$s = "Non Confirmé";
-if($demande->statu == 'C')
-$s = "Confirmé";
-if($demande->statu == 'R')
-$s = "Rejeté";
-@endphp
-    <td>{{$s}}</td>
+            @php
+            if($demande->statu == 'NC')
+            $s = "Non Confirmé";
+            if($demande->statu == 'C')
+            $s = "Confirmé";
+            if($demande->statu == 'R')
+            $s = "Rejeté";
+            @endphp
+            <td>{{$s}}</td>
 
-    <td>
-    <buttono onclick="document.getElementById('idDTU').value = <?php echo $demande->id ; ?> ;
-    document.getElementById('updateForm').submit()" class="btn btn-success">Accepte</button></td>
-    <td>
-    <button onclick="document.getElementById('idR').value = <?php echo $demande->id ; ?> ;
+            <td>
+                <buttono onclick="document.getElementById('idDTU').value = <?php echo $demande->id; ?> ;
+    document.getElementById('updateForm').submit()" class="btn btn-success">Accepte</button>
+            </td>
+            <td>
+                <button onclick="document.getElementById('idR').value = <?php echo $demande->id; ?> ;
     document.getElementById('updateForm1').submit()" class="btn btn-danger">Refuser</button>
-    </td>
+            </td>
 
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
 
-        </tr>
     </tbody>
 </table>
-
-
-        </tr>
-    @endforeach
-    </tbody>
+</tr>
+@endforeach
+</tbody>
 </table>
 
 <form id="updateForm" method="POST" action="{{ route('accepter-demande') }}" style="display:none">
@@ -107,7 +103,77 @@ $s = "Rejeté";
     <input id="idR" name="idR" type="number">
 </form>
 
+@elseif( auth()->user()->role->display_name == 'technicien')
+<li class="nav-item">
+    <h1>this is technicien page </h1>
+</li>
 
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">date_choix</th>
+            <th scope="col">chercheur</th>
+            <th scope="col">fword</th>
+            <th scope="col">statu</th>
+            <th scope="col">Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach($demandes as $demande)
+        @if(!($demande->statu == 'P' || $demande->statu == 'NC') )
+        <tr>
+            <th scope="row">{{$demande->id}}</th>
+            <td>{{$demande->date_choix}}</td>
+            <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
+
+
+            <td><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
+
+            @php
+            if($demande->statu == 'P')
+            $s = "En attente ...";
+            if($demande->statu == 'C')
+            $s = "Confirme";
+            if($demande->statu == 'NC')
+            $s = "Non Confirme";
+            if($demande->statu == 'R')
+            $s = "Realise";
+            if($demande->statu == 'NR')
+            $s = "Non Realise";
+            @endphp
+            <td>{{$s}}</td>
+
+            <td>
+                <buttono onclick="document.getElementById('idDTU').value = <?php echo $demande->id; ?> ;
+                 document.getElementById('updateForm').submit()" class="btn btn-success">Realise</button>
+            </td>
+            <td>
+                <button onclick="document.getElementById('idR').value = <?php echo $demande->id; ?> ;
+                 document.getElementById('updateForm1').submit()" class="btn btn-danger">Non Realise</button>
+            </td>
+
+        </tr>
+        @endif
+        @endforeach
+    </tbody>
+</table>
+
+
+
+<form id="updateForm" method="POST" action="{{ route('Realise-demande') }}" style="display:none">
+    @csrf
+    <input id="idDTU" name="idDTU" type="number">
+</form>
+<form id="updateForm1" method="POST" action="{{ route('Non_Realise-demande') }}" style="display:none">
+    @csrf
+    <input id="idR" name="idR" type="number">
+</form>
+
+
+<!-- Admin brows page -->
 
 @else
 <li class="nav-item">
@@ -435,7 +501,10 @@ $s = "Rejeté";
     var deleteFormAction;
     $('td').on('click', '.delete', function(e) {
 
-        $('#delete_form')[0].action = '{{ route('voyager.'.$dataType->slug.'.destroy', '__id ') }}'.replace('__id', $(this).data('id'));
+        $('#delete_form')[0].action = '{{ route('
+        voyager.
+        '.$dataType->slug.'.destroy ', '
+        __id ') }}'.replace('__id', $(this).data('id'));
 
         $('#delete_modal').modal('show');
     });
@@ -453,9 +522,15 @@ $s = "Rejeté";
     $(function() {
         $('#show_soft_deletes').change(function() {
             if ($(this).prop('checked')) {
-                $('#dataTable').before('<a id="redir" href="{{ (route('voyager.'.$dataType->slug.'.index ', array_merge($params, ['showSoftDeleted ' => 1]), true)) }}"></a>');
+                $('#dataTable').before('<a id="redir" href="{{ (route('
+                    voyager.
+                    '.$dataType->slug.'.index ', array_merge($params, ['
+                    showSoftDeleted ' => 1]), true)) }}"></a>');
             } else {
-                $('#dataTable').before('<a id="redir" href="{{ (route('voyager.'.$dataType->slug.'.index ', array_merge($params, ['showSoftDeleted ' => 0]), true)) }}"></a>');
+                $('#dataTable').before('<a id="redir" href="{{ (route('
+                    voyager.
+                    '.$dataType->slug.'.index ', array_merge($params, ['
+                    showSoftDeleted ' => 0]), true)) }}"></a>');
 
             }
 

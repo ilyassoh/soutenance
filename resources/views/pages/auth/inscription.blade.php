@@ -87,8 +87,34 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-3 my-2">
                     <label for="structure" class="form-label fw-bold ms-3">Structure : </label>
-                    <input type="text" class="form-control border border-dark" id="structure" aria-describedby="structure" name="structure" value="{{old('structure')}}">
+                    <select class="form-select border border-dark" aria-label="Default select example" name="structure" value="{{old('structure')}}">
+                        <option selected>Votre Strucutre : </option>
+                        @foreach ($structures as $structure)
+                            <option value="{{ $structure->id }}">{{ $structure->intitule }}</option>
+                        @endforeach
+                    </select>
                     <span class="text-danger">@error('structure') {{$message}} @enderror</span>
+                    <label for="structure" class="form-label fw-bold ms-3">Etablissement : </label>
+                    <select class="form-select border border-dark" aria-label="Default select example" name="etablissement" value="{{old('etablissement')}}">
+                        <option selected>Votre Statut Académique</option>
+                        <option value="" selected>Choisir</option>
+                        <option value="fssm">FSSM</option>
+                        <option value="fstg">FSTG</option>
+                        <option value="ensam">ENSA-M</option>
+                        <option value="encg">ENCG</option>
+                        <option value="fsjes">FSJES</option>
+                        <option value="fmpm">FMPM</option>
+                        <option value="flshm">FLSHM</option>
+                        <option value="ens">ENS</option>
+                        <option value="ensas">ENSA Safi</option>
+                        <option value="ests">EST Safi</option>
+                        <option value="este">EST Essaouira</option>
+                        <option value="fsjesk">FSJESK</option>
+                        <option value="cim">CIM</option>
+                        <option value="estk">ESTK</option>
+                        <option value="fps">FPS</option>
+                    </select>
+                    <span class="text-danger">@error('etablissement') {{$message}} @enderror</span>
                 </div>
                 <div class="col-md-7 my-2 text-center">
                     <label for="biographie" class="form-label fw-bold ms-3">Biographie : </label>
