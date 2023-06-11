@@ -40,68 +40,20 @@
     document.getElementById('equipements').setAttribute('id', 'activeLink')
   </script>
 
-  <!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active" id="img_equip">
-        <h2 class="fixed-bottom text-center"> Les equipements </h2>
-      </div>
-    </div>
-  </div> -->
+
 
 
   <div class="accordion" id="accordionPanelsStayOpenExample">
 
-    <!-- <div class="wrapper d-flex align-items-stretch"> -->
-    <!-- <nav id="sidebar">
-        <div class="custom-menu">
-          <button type="button" id="sidebarCollapse" class="btn btn-primary">
-            <i class="fa fa-bars"></i>
-            <span class="sr-only">Toggle Menu</span>
-          </button>
-        </div>
-        <div class="p-4">
-          <h1><a class="logo">Les equipementes<span>les machine de CAC </span></a></h1>
-          <ul class="list-unstyled components mb-5">
-            <li id="liLab1" class="active">
-              <a href="#content" onclick="afficheLab('1')" > Labo 1</a>
-            </li>
-            <li id="liLab2">
-              <a href="#content" onclick="afficheLab('2')" > Labo 2</a>
-            </li>
-            <li>
-              <a href="#content"> Labo 3</a>
-            </li>
-            <li>
-              <a href="#content"> Labo 4</a>
-            </li>
-            <li>
-              <a href="#content"> Labo 5</a>
-            </li>
-            <li>
-              <a href="#content"> Labo 6</a>
-            </li>
-            <li>
-              <a href="#content"> Labo 7</a>
-            </li>
-          </ul>
+    <!-- radio button groups -->
 
-          <div class="mb-5">
-            <h3 class="h6 mb-3">Chercher ici</h3>
-            <form action="#" class="subscribe-form">
-              <div class="form-group d-flex">
-                <div class="icon"><span class="icon-paper-plane"></span></div>
-                <input type="text" class="form-control" placeholder="Searche...">
-              </div>
-            </form>
-          </div>
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked="">
+      <label class="btn btn-outline-primary" for="btnradio1" onclick="afficheLab('1')">FSSM</label>
 
-        </div>
-      </nav> -->
-
-    <ButtonGroup variant="outlined" aria-label="outlined button group">
-      <Button style="color:blue; " onclick="afficheLab('1')">FSSM</Button>
-      <Button onclick="afficheLab('2')">CAC</Button>
-    </ButtonGroup>
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btnradio2" onclick="afficheLab('2')">CIM</label>
+    </div>
 
     <!-- Page Content  -->
     <div id="content" class="p-4 p-md-5 pt-5">
@@ -151,7 +103,7 @@
             <div class="row">
               <!-------------------- machine 1 ----------------------->
               @foreach($machine as $row)
-               @if( $row['local'] =='radio2')
+              @if( $row['local'] =='radio2')
               <div class="col-sm-3">
                 <div class="work-box">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
@@ -178,111 +130,10 @@
               </div>
               @endif
               @endforeach
-              </div>
+            </div>
         </section>
       </div>
-              <!-------------------- machine 2 ----------------------->
-          <!--    <div class="col-md-3">
-                <div class="work-box">
-                  <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                    <div class="work-img">
-                      <img src="{{URL('imgs/machie_3.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                  </a>
-                  <div class="work-content">
-                    <div class="row">
-                      <div class="col-sm-8">
-                        <h2 class="w-title">Machine 2</h2>
-                        <div class="w-more">
-                          <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="w-like">
-                          <a href="portfolio-details.html"> <span class="bi bi-plus-circle"></span></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
-              <!-------------------- machine 2 ----------------------
-              <div class="col-md-3">
-                <div class="work-box">
-                  <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                    <div class="work-img">
-                      <img src="{{URL('imgs/machie_3.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                  </a>
-                  <div class="work-content">
-                    <div class="row">
-                      <div class="col-sm-8">
-                        <h2 class="w-title">Machine 3</h2>
-                        <div class="w-more">
-                          <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="w-like">
-                          <a href="portfolio-details.html"> <span class="bi bi-plus-circle"></span></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="work-box">
-                  <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                    <div class="work-img">
-                      <img src="{{URL('imgs/machie_3.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                  </a>
-                  <div class="work-content">
-                    <div class="row">
-                      <div class="col-sm-8">
-                        <h2 class="w-title">Machine 2</h2>
-                        <div class="w-more">
-                          <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="w-like">
-                          <a href="portfolio-details.html"> <span class="bi bi-plus-circle"></span></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              ------------------ machine 2 ----------------------
-              <div class="col-md-3">
-                <div class="work-box">
-                  <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                    <div class="work-img">
-                      <img src="{{URL('imgs/machie_3.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                  </a>
-                  <div class="work-content">
-                    <div class="row">
-                      <div class="col-sm-8">
-                        <h2 class="w-title">Machine 3</h2>
-                        <div class="w-more">
-                          <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="w-like">
-                          <a href="portfolio-details.html"> <span class="bi bi-plus-circle"></span></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
--->
-         
+     
 
     </div>
   </div>
