@@ -46,27 +46,27 @@
   <div class="accordion" id="accordionPanelsStayOpenExample">
 
     <!-- radio button groups -->
+    <div class="mt-4 d-flex justify-content-center">
+      <div class="btn-group " role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check " name="btnradio" id="btnradio1" autocomplete="off" checked="">
+        <label class="btn btn-outline-primary" for="btnradio1" onclick="afficheLab('1')" style="border-radius: 5px;  margin:10px">FSSM</label>
 
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked="">
-      <label class="btn btn-outline-primary" for="btnradio1" onclick="afficheLab('1')">FSSM</label>
-
-      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-      <label class="btn btn-outline-primary" for="btnradio2" onclick="afficheLab('2')">CIM</label>
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio2" onclick="afficheLab('2')" style="border-radius: 5px;  margin:10px">CIM</label>
+      </div>
     </div>
-
     <!-- Page Content  -->
     <div id="content" class="p-4 p-md-5 pt-5">
-      <h2 class="mb-4" id="title"></h2>
+      <!-- <h2 class="mb-4" id="title"></h2> -->
       <div id="lab1">
-        <section id="work" class="portfolio-mf sect-pt4 route">
+        <section id="work" class="portfolio-mf sect-pt0 route">
           <div class="container">
             <div class="row">
               @foreach($machine as $row)
               @if( $row['local'] =='radio1')
-              <!-------------------- machine 1 ----------------------->
-              <div class="col-sm-3">
-                <div class="work-box">
+              <!-------------------- FSSM category ----------------------->
+              <div class="col-sm-3 ">
+                <div class="work-box" style="border: 2px; border-color:#D3D3D3; border-style: solid; border-radius:5px;">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
                     <div class="work-img">
                       <img src="{{URL('imgs/machie_1.jpg')}}" alt="" class="img-fluid">
@@ -98,14 +98,14 @@
       </div>
       <!------------------------ lab2 ----------------------->
       <div id="lab2" style="display: none;">
-        <section id="work" class="portfolio-mf sect-pt4 route">
+        <section id="work" class="portfolio-mf sect-pt0 route">
           <div class="container">
             <div class="row">
-              <!-------------------- machine 1 ----------------------->
+              <!-------------------- CIM category ----------------------->
               @foreach($machine as $row)
               @if( $row['local'] =='radio2')
               <div class="col-sm-3">
-                <div class="work-box">
+                <div class="work-box" style="border: 2px; border-color:#D3D3D3; border-style: solid; border-radius:5px;">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
                     <div class="work-img">
                       <img src="{{URL('imgs/machie_3.jpg')}}" alt="" class="img-fluid">
@@ -133,7 +133,7 @@
             </div>
         </section>
       </div>
-     
+
 
     </div>
   </div>
