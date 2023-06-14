@@ -131,6 +131,7 @@ Route::post('/remove-imageProfile-chercheur',[CherAuthController::class,'removeI
 
 // Effectuer une demande 
 Route::post('/demande',[demandeControlleur::class,'effectuerDemande'])->name('demande');
+Route::post('/envoyerRapport',[demandeControlleur::class,'envoyerRapport'])->name('envoyerRapport');
 
 
 Route::post('/connexion-secretaire',[secrAuthController::class,'connexionChercheur'])->name('connexion-secretaire');

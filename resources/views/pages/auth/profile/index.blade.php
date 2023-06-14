@@ -16,7 +16,7 @@
 	<title>CAC | {{$data->nom}}</title>
 </head>
 
-<body onload="showSection(3)">
+<body onload="showSection(2)">
 <script>
 	// Trigger onchange event when the page is loaded
 	window.addEventListener('DOMContentLoaded', function() {
@@ -379,7 +379,7 @@
 							<?php
 								function isDateReservedForMachine($reservations, $date, $machineId) {
 									foreach ($reservations as $reservation) {
-										if ($reservation['id_machine'] == $machineId && $reservation['datechoix'] == $date) {
+										if ($reservation['machines_id'] == $machineId && $reservation['rdv'] == $date) {
 											return true; // La date est réservée pour la machine donnée
 										}
 									}
@@ -538,7 +538,7 @@
 						<div class="row justify-content-center text-center align-items-center mt-3" id="lastPart">
 							<input type="text" name="idUser" id="idUser" value="{{$data->id}}" style="display:none;">
 							<input type="number" name="idDemande" id="idDemande" style="display:none;">
-							<input type="text" name="dc" id="dc" style="display:none;">
+							<input type="text" name="rdv" id="dc" style="display:none;">
 							<div class="row" id="containerFD">
 								<div class="col-md-2"></div>
 								<div class="col-md-8">
@@ -559,6 +559,11 @@
 
 
 			<main class="content" id="section3" style="display:none;">
+				@if ($message = Session::get('success'))
+					<div class="alert alert-success alert-block">
+						<strong>{{ $message }}</strong>
+					</div>
+				@endif	
 				@if (count($demandes)<=0)
 					<div class="container text-center">
 						<h3 class="text-secondary">Pas de demande</h3>
@@ -572,20 +577,62 @@
 							<th class="bg-success text-light">Document</th>
 							<th class="bg-success text-light">Date</th>
 							<th class="bg-success text-light">Statut</th>
+							<th class="bg-success text-light">Ajouter Rapport</th>
 						</tr>
 					</thead>
 					<tbody>
 					@foreach($demandes as $d)
 						<tr>
 							<td style="background:#222E3C;" class="text-light">{{$d->id}}</td>
-							<td><a href="{{ asset('demandes_effectuees/'.$d->doc_word) }}" target="_blank">Téléchanrger document</a></td>
+							<td>
+								<a href="{{ asset('demandes_effectuees/'.$d->fword) }}" target="_blank">Téléchanrger document</a>
+						    </td>
 							<td>{{$d->date_choix}}</td>
 							<td>{{$d->statu}}</td>
+							@if ($d->rapport != '')
+							<td>
+								<a href="{{ asset('rapports/'.$d->rapport) }}" target="_blank">Téléchanrger Rapport</a>
+						    </td>
+							@else
+							<td class="text-center text-success fs-3"><a><i class="fa-solid fa-plus"
+								onclick="ddd({{$d->id}})"></i></a>
+							</td>
+							@endif 
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnR" style="display:none;">
+							</button>
+							<script>
+								function ddd(x){
+									document.getElementById('idD').value = x
+									document.getElementById('btnR').click()
+								}
+							</script>
 						</tr>
 					@endforeach
 					</tbody>
 				</table>
 				@endif
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				<form method="POST" action="{{ route('envoyerRapport') }}" enctype="multipart/form-data">
+					@csrf
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<input type="number" id="idD"  name="idDemande" value="" style="display:none;">
+						<input type="file" name="rapport" placeholder="Rapport">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+						<button type="submit" class="btn btn-primary">Enregistrer</button>
+					</div>
+					</div>
+				</form>
+				</div>
+				</div>
 			</main>
 
 
