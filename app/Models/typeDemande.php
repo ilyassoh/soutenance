@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 
-class typeDemande extends Model
+class type_demande extends Model
 {
     use HasApiTokens, HasFactory;
 
@@ -20,5 +20,10 @@ class typeDemande extends Model
         'fichier_word',
         'id_machine'
     ];
+
+    public function machine()
+    {
+        return $this->belongsTo(machine::class);
+    }
 
 }

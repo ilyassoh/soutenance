@@ -9,8 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class machine extends Model
 {
 
-    protected $table2='machines';
 
     use HasFactory;
+
+    public function type_demandes()
+    {
+        return $this->hasMany(type_demande::class);
+    }
     
 }

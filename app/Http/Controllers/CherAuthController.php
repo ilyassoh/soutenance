@@ -7,7 +7,7 @@ use App\Models\Chercheur;
 use App\Models\Machine;
 use App\Models\Reservations;
 use App\Models\Demandes;
-use App\Models\typeDemande;
+use App\Models\type_demande;
 use App\Models\Structures;
 use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -199,7 +199,7 @@ class CherAuthController extends Controller
             $machines = Machine::all();
             $data = Chercheur::where('id','=',Session::get('loginId'))->first();
             $demandes = Demandes::where('chercheurs_id','=',Session::get('loginId'))->get();
-            $typesDemandes = typeDemande::all();
+            $typesDemandes = type_demande::all();
             if ($data){
                 return view('pages.auth.profile.index',compact('data','typesDemandes','machines','reservations','demandes'));
             }

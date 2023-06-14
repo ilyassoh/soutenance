@@ -43,7 +43,7 @@
 @if ( auth()->user()->role->display_name == 'Directeur')
 
 <li class="nav-item">
-    <h1>this is directeur page </h1>
+    <h1> Directeur : {{ auth()->user()->name }} </h1>
 </li>
 <table class="table table-striped">
     <thead>
@@ -103,9 +103,9 @@
     <input id="idR" name="idR" type="number">
 </form>
 
-@elseif( auth()->user()->role->display_name == 'technicien')
+@elseif( auth()->user()->role->display_name == 'Technicien')
 <li class="nav-item">
-    <h1>this is technicien page </h1>
+    <h1 class="text-center mb-3"> Technicien : {{ auth()->user()->name }}</h1>
 </li>
 
 <table class="table table-striped">

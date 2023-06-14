@@ -65,7 +65,7 @@
             <td>{{$chercheur->nom}} {{$chercheur->prenom}}</td>
             <td>{{$chercheur->email}}</td>
             <td>{{$chercheur->telephone}}</td>
-            <td>{{$chercheur->image}}</td>
+            <td><img class="w-40 rounded-circle" width="60" src="{{asset('images/chercheurs/'.$chercheur->image)}}" alt=""></td>
 
 @php
 if($chercheur->is_verified == '0')

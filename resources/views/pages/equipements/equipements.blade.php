@@ -63,13 +63,20 @@
           <div class="container">
             <div class="row">
               @foreach($machine as $row)
-              @if( $row['local'] =='radio1')
+              @if( $row['local'] =='Local 1')
+              @php
+                $var = $row['rep_images'];
+                $imagePath = str_replace('\\', '/', $var);
+                $imagePath = preg_replace('/\/+/', '/', $imagePath);
+                $imagePath = trim($imagePath, "[]");
+                $imagePath = trim($imagePath, '""');
+              @endphp
               <!-------------------- FSSM category ----------------------->
-              <div class="col-sm-3 ">
+              <div class="col-md-3">
                 <div class="work-box" style="border: 2px; border-color:#D3D3D3; border-style: solid; border-radius:5px;">
-                  <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
+                  <a href="{{URL('storage/'.$imagePath)}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
                     <div class="work-img">
-                      <img src="{{URL('imgs/machie_1.jpg')}}" alt="" class="img-fluid">
+                      <img src="{{URL('storage/'.$imagePath)}}" alt="" class="img-fluid w-100">
                     </div>
                   </a>
                   <div class="work-content">
@@ -103,7 +110,8 @@
             <div class="row">
               <!-------------------- CIM category ----------------------->
               @foreach($machine as $row)
-              @if( $row['local'] =='radio2')
+              @if( $row['local'] =='Local 2')
+              <img src="{{URL('storage/'.$imagePath)}}" alt="...">
               <div class="col-sm-3">
                 <div class="work-box" style="border: 2px; border-color:#D3D3D3; border-style: solid; border-radius:5px;">
                   <a href="{{URL('imgs/machie_1.jpg')}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
