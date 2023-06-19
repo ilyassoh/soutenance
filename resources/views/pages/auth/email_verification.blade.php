@@ -21,9 +21,9 @@
     
     <!-- Formulaire de connexion  -->
     <div class="container mt-2">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-4"></div>
-            <form class="col-md-4" action="{{route('validate-code-email')}}" method="POST">
+            <form class="col-md-4 justify-content-center" action="{{route('validate-code-email')}}" method="POST">
                 @csrf
                 <div class="text-center">
                     <img src="{{url('imgs/cac.png')}}" width="200" class="d-inline-block align-top rounded-3" alt="Bootstrap" loading="lazy">
@@ -38,7 +38,7 @@
                     <div class="alert alert-danger">{{session('invalideEmail')}}</div>
                 @endif
                 <!-- Email input -->
-                <div class="form-outline mb-2">
+                <div class="mb-2">
                     <label class="form-label fw-bold ms-2" for="code">Entrer le Code de validation : </label>
                     <input type="text" id="code" class="form-control" name="code" value="{{old('code')}}"  required/>
                     <span class="text-danger">@error('email') {{$message}} @enderror</span>

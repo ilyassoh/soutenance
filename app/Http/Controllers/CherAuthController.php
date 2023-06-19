@@ -9,6 +9,7 @@ use App\Models\Reservations;
 use App\Models\Demandes;
 use App\Models\type_demande;
 use App\Models\Structures;
+use App\Models\crenaux;
 use Illuminate\Support\Facades\Mail;
 use PhpOffice\PhpWord\TemplateProcessor;
 Use App\Mail\MailNotify;
@@ -94,22 +95,17 @@ class CherAuthController extends Controller
     }
 
     public function resendCodeEmail(Request $request){
-            $code = rand(100000,999999);
-            $chercheur = Chercheur::where('email','=',$request->email)->where('email_verified','=',0)->first();
-            if ($chercheur){
-                $chercheur->code_verification = $code ;
-                $chercheur->save();
-                Mail::to($request->email)->send(new sendCodeMail($chercheur->email,$chercheur->code_verification,$chercheur->nom));
-                return view("pages.auth.email_verification");
-            }
-            else {
-                $this->emailValidationPage();
-            }
-        // }
-        // else {
-        //     return back();
-        // }
-        
+        $code = rand(100000,999999);
+        $chercheur = Chercheur::where('email','=',$request->email)->where('email_verified','=',0)->first();
+        if ($chercheur){
+            $chercheur->code_verification = $code ;
+            $chercheur->save();
+            Mail::to($request->email)->send(new sendCodeMail($chercheur->email,$chercheur->code_verification,$chercheur->nom));
+            return view("pages.auth.email_verification");
+        }
+        else {
+            $this->emailValidationPage();
+        }
     }
 
     public function EmailVerificationPage(){
@@ -194,14 +190,14 @@ class CherAuthController extends Controller
 
     public function profile(){
         if (Session::has('loginId')){
-            // Select Data 
+            $structures = Structures::all();
             $reservations = Reservations::all();
             $machines = Machine::all();
             $data = Chercheur::where('id','=',Session::get('loginId'))->first();
             $demandes = Demandes::where('chercheurs_id','=',Session::get('loginId'))->get();
             $typesDemandes = type_demande::all();
             if ($data){
-                return view('pages.auth.profile.index',compact('data','typesDemandes','machines','reservations','demandes'));
+                return view('pages.auth.profile.index',compact('data','typesDemandes','machines','reservations','demandes','structures'));
             }
             else {
                 return back();  
@@ -212,6 +208,7 @@ class CherAuthController extends Controller
 
     // Fontion pour se déconnecter 
     public function deconnexion(){
+        Session::flush();
         if (Session::has('loginId')){
             header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
             session()->forget('loginId');

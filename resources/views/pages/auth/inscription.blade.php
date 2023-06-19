@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-4 my-2">
                     <label for="image" class="form-label fw-bold ms-3">Image : </label>
-                    <input type="file" class="form-control border border-dark" name="image" value="{{old('image')}}">
+                    <input type="file" class="form-control border border-dark" name="image" value="{{old('image')}}" placeholder="choisir votre image de profile">
                     <span class="text-danger">@error('image') {{$message}} @enderror</span>
                 </div>
                 <div class="col-md-3 my-2">
@@ -124,7 +124,7 @@
             </div>
             <div class="row text-center my-4">
                 <div class="col-md-5"></div>
-                <button type="submit" class="col-md-2 btn btn-primary">Submit</button>
+                <button type="submit" class="col-md-2 btn btn-primary">S'inscrire</button>
                 <div class="col-md-5"></div>
             </div>
         </form>

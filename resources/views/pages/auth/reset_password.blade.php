@@ -29,7 +29,7 @@
             @if(Session::has('password'))
                 <form class="col-md-6" action="{{route('rp')}}" method="POST">
                     @csrf
-                    <h3 class="text-center">Reset Password !</h1>
+                    <h3 class="text-center">Réinitialiser Mot de passe !</h1>
                     <!-- Email input -->
                     @if(Session::has('fail'))
                     <div class="alert alert-danger">{{Session::get('fail')}}</div>
@@ -81,7 +81,7 @@
             @else
             <form class="col-md-6" action="{{route('oublier-mp')}}" method="POST">
                 @csrf
-                <h3 class="text-center">Reset Password !</h1>
+                <h3 class="text-center mb-3">Réinitialiser Mot de passe ! !</h1>
                 <!-- Email input -->
                 @if(Session::has('fail'))
                 <div class="alert alert-danger">{{Session::get('fail')}}</div>

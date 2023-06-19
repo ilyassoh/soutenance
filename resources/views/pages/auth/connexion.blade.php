@@ -42,7 +42,7 @@
                 </div>
                 <!-- Password input -->
                 <div class="form-outline mb-2">
-                    <label class="form-label fw-bold ms-2" for="password">Password : </label>
+                    <label class="form-label fw-bold ms-2" for="password">Mot de Passe : </label>
                     <input type="password" id="password" name="password" value="{{old('password')}}" class="form-control border border-dark"/>
                     <span class="text-danger">@error('password') {{$message}} @enderror</span>
                 </div>
@@ -52,18 +52,18 @@
                     <!-- Checkbox -->
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="form2Example31"/>
-                            <label class="form-check-label" for="form2Example31"> Remember me </label>
+                            <label class="form-check-label" for="form2Example31"> Se souvenir de moi  </label>
                         </div>
                     </div>
                     <div class="col">
                     <!-- Simple link -->
-                    <a href="{{route('page-oubli-mp')}}">Forgot password?</a>
+                    <a href="{{route('page-oubli-mp')}}">Mot de passe oublié ?</a>
                     </div>
                 </div>
                 <!-- Submit button -->
                 <div class="row text-center">
                     <div class="col-md-4"></div>
-                    <button type="submit" class="col-md-4 btn btn-primary btn-block mb-2">Sign in</button>
+                    <button type="submit" class="col-md-4 btn btn-primary btn-block mb-2">Connexion</button>
                     <div class="col-md-4"></div>
                 </div>
                 <!-- Register buttons -->

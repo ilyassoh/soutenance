@@ -30,7 +30,7 @@
 </script>
 <script>
 	function showSection(x){
-		for (let i=0;i<8;i++){
+		for (let i=0;i<4;i++){
 			document.getElementById('section'+i).style.display = "none"
 			document.getElementById('btnSection'+i).classList.remove('active')
 		}
@@ -54,7 +54,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand bg-success text-decoration-none">
-          			<span class="align-middle ">PP</span>
+          			<span class="align-middle ">CAC</span>
         		</a>
 				<ul class="sidebar-nav">
 					<li class="sidebar-item active" id="btnSection0" onclick="showSection(0)">
@@ -82,35 +82,11 @@
 							<span class="align-middle">Historique</span>
             			</a>
 					</li>
-					<li class="sidebar-item" id="btnSection4" onclick="showSection(4)">
-						<a class="sidebar-link">
-              				<i class="align-middle" data-feather="user-plus"></i> 
-							<span class="align-middle">Rapports</span>
-            			</a>
-					</li>
-					<li class="sidebar-item" id="btnSection5" onclick="showSection(5)">
-						<a class="sidebar-link">
-							<i class="fa-solid fa-language"></i> 
-							<span class="align-middle">Languages</span>
-            			</a>
-					</li>
-					<li class="sidebar-item" id="btnSection6" onclick="showSection(6)">
-						<a class="sidebar-link">
-							<i class="fa-sharp fa-regular fa-face-smile"></i>
-							<span class="align-middle">Habits</span>
-            			</a>
-					</li>
-					<li class="sidebar-item" id="btnSection7" onclick="showSection(7)">
-						<a class="sidebar-link">
-							<i class="fa-sharp fa-solid fa-school"></i>
-							<span class="align-middle">Education</span>
-            			</a>
-					</li>
 				</ul>
 				<div class="sidebar-cta w-100">
 					<div class="sidebar-cta-content">
 						<div class="d-grid">
-							<a href="{{route('deconnexion-chercheur')}}" class="btn btn-primary">Logout</a>
+							<a href="{{route('deconnexion-chercheur')}}" class="btn btn-primary">Déconnexion</a>
 						</div>
 					</div>
 				</div>
@@ -137,13 +113,21 @@
 				<span class="text-dark">{{$data->nom}}</span>
 			  </a>
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<a class="dropdown-item" href="#" onclick="showSection(0)">
+									<i class="align-middle me-1" data-feather="pie-chart"></i> Dashboard
+								</a>
+								<a class="dropdown-item" href="#" onclick="showSection(1)">
+									<i class="align-middle me-1" data-feather="user"></i> Profile
+								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+								<a class="dropdown-item" href="" onclick="showSection(2)">
+									<i class="align-middle me-1" data-feather="settings">
+								</i> Demande</a>
+								<a class="dropdown-item" href="#" onclick="showSection(3)">
+									<i class="align-middle me-1" data-feather="help-circle"></i> Historique
+								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" href="{{ route('deconnexion-chercheur') }}">Déconnexion</a>
 							</div>
 						</li>
 					</ul>
@@ -226,7 +210,7 @@
 						<br>
 						<form action="remove-imageProfile-chercheur" method="post">
 							@csrf
-							<button type="submit" class="btn btn-danger">Remove Photo</button>
+							<button type="submit" class="btn btn-danger">Supprimer</button>
 						</form>
 					<br>
 				</div>
@@ -292,11 +276,37 @@
 						</div>
 						<div class="col-md-1"></div>
 						<div class="col-md-1"></div>
-						<div class="col-md-3 my-2">
-							<label for="structure" class="form-label fw-bold ms-3">Structure : </label>
-							<input type="text" class="form-control border border-dark" id="structure" aria-describedby="structure" name="structure" value="{{$data->structure}}">
-							<span class="text-danger">@error('structure') {{$message}} @enderror</span>
-						</div>
+                <div class="col-md-3 my-2">
+                    <label for="structure" class="form-label fw-bold ms-3">Structure : </label>
+                    <select class="form-select border border-dark" aria-label="Default select example" name="structure" value="{{old('structure')}}">
+                        <option selected>Votre Strucutre : </option>
+                        @foreach ($structures as $structure)
+                            <option value="{{ $structure->id }}">{{ $structure->intitule }}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger">@error('structure') {{$message}} @enderror</span>
+                    <label for="structure" class="form-label fw-bold ms-3">Etablissement : </label>
+                    <select class="form-select border border-dark" aria-label="Default select example" name="etablissement" value="{{old('etablissement')}}">
+                        <option selected>Votre Statut Académique</option>
+                        <option value="" selected>Choisir</option>
+                        <option value="fssm">FSSM</option>
+                        <option value="fstg">FSTG</option>
+                        <option value="ensam">ENSA-M</option>
+                        <option value="encg">ENCG</option>
+                        <option value="fsjes">FSJES</option>
+                        <option value="fmpm">FMPM</option>
+                        <option value="flshm">FLSHM</option>
+                        <option value="ens">ENS</option>
+                        <option value="ensas">ENSA Safi</option>
+                        <option value="ests">EST Safi</option>
+                        <option value="este">EST Essaouira</option>
+                        <option value="fsjesk">FSJESK</option>
+                        <option value="cim">CIM</option>
+                        <option value="estk">ESTK</option>
+                        <option value="fps">FPS</option>
+                    </select>
+                    <span class="text-danger">@error('etablissement') {{$message}} @enderror</span>
+                </div>
 						<div class="col-md-7 my-2 text-center">
 							<label for="biographie" class="form-label fw-bold ms-3">Biographie : </label>
 							<textarea class="form-control border border-dark" placeholder="Leave a comment here" id="floatingTextarea" name="biographie" rows="5" cols="30">{{$data->biographie}}</textarea>
@@ -340,25 +350,20 @@
 						taskList.removeChild(taskList.childNodes[taskId]);
 					}
 				</script>
+				<?php $m = -1 ; ?>
 				<form action="{{route('demande')}}" method="post" class="row">
 					@csrf
 					<span id="nbrmachines" style="display:none;">{{count($machines)}}</span>
 					<span id="nbrdemandes" style="display:none;">{{count($machines)}}</span>
-					<h2 class="text-center text-decoration-underline">Effectuer Une Demande </h2>
-					@if(Session::has('demEnr'))
-						<div class="row my-4">
-							<div class="col-md-2"></div>
-							<div class="col-md-8 bg-success borer border-4 rounded-5">
-								<div class="row text-light fw-bold fs-5">
-									<div class="col-md-8 text-center py-1 px-3">
-										{{Session('demEnr')}}
-									</div>
-									<div class="col-md-4 mt-1">
-										<i onclick="window.location='{{ route('annuler') }}'" class="fa-solid fa-xmark"></i>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-2"></div>
+					<h2 class="text-center">Effectuer Une Demande </h2>
+					@if(session('success'))
+						<div class="container alert alert-success text-center">
+							{{ session('success') }}
+						</div>
+					@endif
+					@if(session('error'))
+						<div class="container alert alert-danger">
+							{{ session('error') }}
 						</div>
 					@endif
 					<div class="row">
@@ -368,9 +373,10 @@
 							<select onchange="handleOptionChangeDemande()" class="form-select" aria-label="Select option" name="typedem" id="typedem" value>
 								<option selected>Select an option</option>
 								@foreach ($typesDemandes as $td)
+								@if ($machines[$td->machines_id-1]['Statu'] != 'Passive')
 								<?php $vv = $td->id.' '.$td->machines_id; ?>
 								<option value="{{$vv}}" {{ old('typedem') === $vv ? 'selected' : '' }}>{{$td->label}}</option>
-									<!-- <option value="{{$td->id.' '.$td->id_machine}}">{{$td->label}}</option> -->
+								@endif
 								@endforeach
 							</select>
 							<span class="text-danger">@error('typedem') {{$message}} @enderror</span>
@@ -380,10 +386,10 @@
 								function isDateReservedForMachine($reservations, $date, $machineId) {
 									foreach ($reservations as $reservation) {
 										if ($reservation['machines_id'] == $machineId && $reservation['rdv'] == $date) {
-											return true; // La date est réservée pour la machine donnée
+											return true; 
 										}
 									}
-									return false; // La date n'est pas réservée pour la machine donnée
+									return false;
 								}
 								$aujourdhui = new DateTime();
 								$unMoisPlusTard = clone $aujourdhui;
@@ -394,45 +400,41 @@
 							<label for="dateChoix" class="form-label fw-bold ms-3">Jour : </label>
 							<select id="mySelect" name="mySelect" class="form-select fw-bold ms-3" onchange="handleOptionChangeDay()">
 								<option value="">Select a day</option>
-								<?php foreach ($periode as $jour) { ?>
-									<option value="{{$jour->format('Y-m-d')}}" {{ old('mySelect') === $jour->format('Y-m-d') ? 'selected' : '' }}>{{$jour->format('Y-m-d');}}</option>
-								<?php  } ?>
+								@php 
+									foreach ($periode as $jour) { 
+										@endphp
+											<option id="jr-{{$jour->format('Y-m-d')}}" value="{{$jour->format('Y-m-d')}}" {{ old('mySelect') === $jour->format('Y-m-d') ? 'selected' : '' }}>{{$jour->format('Y-m-d');}}</option>
+										@php
+									} 
+								@endphp
 							</select>
 						</div>
 						<div class="col-md-1"></div>
 						<div class="col-md-1"></div>
 						<div class="col-md-10 mt-5" id="containerMachines">
 								@foreach ($machines as $m)
-								<div class="row" id="machine{{$m->id}}" style="display:none;">
+								<div class="row justify-content-center" id="machine{{$m->id}}" style="display:none;">
 									<h3 class="text-center mb-3">{{$m->label}}</h3>
 										<?php
-											// Afficher les jours et les plages horaires
 											foreach ($periode as $jour) {
 										?>
 										<div class="col-md-1"></div>
 										<div class="col-md-10" id="<?php echo 'machine'.$m->id.'day'.$jour->format('Y-m-d')?>" style="display:none;">
-											<div class="row">
-												<span class="col-md-4">{{$jour->format('Y-m-d')}}</span>
+											<h4 class="text-center">{{$jour->format('Y-m-d')}}</h4>
+											<div class="row justify-content-center">
 												<?php
-												$plagesHoraires = [ 
-													'08:00 - 10:00',
-													'10:00 - 12:00',
-													'12:00 - 14:00',
-													'14:00 - 16:00'
-												];
-												// Afficher les plages horaires pour chaque jour
-												foreach ($plagesHoraires as $plage) {
-												$res = $jour->format('Y-m-d').' / '.$plage;
-												// echo $res;
+												$timeSlots = explode(",", $m->crenaux);
+												foreach ($timeSlots as $t) {
+												$res = $jour->format('Y-m-d').' / '.$t;
 												if (isDateReservedForMachine($reservations,$res,$m->id)){
 												?>
-													<span 
-													class="col-md-2 border rounded-3 bg-secondary text-light fw-bold">{{$plage}}
-													</span>
+												<a 
+													class="col-md-2 border rounded-3 bg-secondary text-light fw-bold">{{$t}}
+												</a>
 												<?php  } else { ?>
-													<span onclick="tokenRDV('<?php echo $res; ?>')"
-													class="col-md-2 border rounded-3 bg-success text-light fw-bold ">{{$plage}}
-													</span>
+													<a onclick="tokenRDV('<?php echo $res; ?>')"
+													class="col-md-2 border rounded-3 bg-success text-light fw-bold ">{{$t}}
+												</a>
 												<?php
 												}
 											}
@@ -481,6 +483,9 @@
 										var idDemande = parts[0];
 										var idMachine = parts[1];
 										var text = e.options[e.selectedIndex].text;
+										var ev = document.getElementById("mySelect");
+										var v = ev.options[ev.selectedIndex].value;
+										var t = ev.options[ev.selectedIndex].text;
 										nbrMachines = document.getElementById('containerMachines').children;
 										for (let i=1;i<=nbrMachines.length-1;i++){
 											document.getElementById('machine'+i).style.display = 'none';
@@ -488,22 +493,62 @@
 										document.getElementById('machine'+idMachine).style.display = '';
 										document.getElementById('idDemande').value = idDemande;
 										r = document.getElementById('rdvContent').value;
-										document.getElementById('dc').value = r;
+										document.getElementById('sectionrdvContent').style.display = 'none';
+										var table = [];
+										for (var i = 0; i < 30; i++) {
+											var date = new Date();
+											date.setDate(date.getDate() + i);
+											var year = date.getFullYear();
+											var month = ('0' + (date.getMonth() + 1)).slice(-2);
+											var day = ('0' + date.getDate()).slice(-2);
+											var formattedDate = year + '-' + month + '-' + day;
+											table.push(formattedDate);
+										}
+										function chekBg(arr) {
+											for (let i = 0; i < arr.length; i++) {
+												if (arr[i].classList.contains('bg-success')) {
+												return false;
+												}
+											}
+											return true;
+										}
+										for (let j=0; j<table.length;j++){
+											document.getElementById('jr-'+table[j]).removeAttribute("style");
+										}
+										// for (let i=1; i<=nbrmachines;i++){
+											for (let j=0; j<table.length;j++){
+												elements = document.getElementById('machine'+idMachine+'day'+table[j]).children[1].children
+												if (chekBg(elements)){
+													document.getElementById('jr-'+table[j]).setAttribute('style','display:none;')
+												}
+											}
+										// }
 										if (text == '1_demande_analyse_elements_CHNSO'){
-											// document.getElementById('formsjs').setAttribute("src", "{{ asset('js/forms.js') }}");
 											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.1_demande_analyse_elements_CHNSO') `;
 										}
 										else if (text == '2_demande_analyse_par_analyse_thermique_ATD-ATG_2echE05'){
-											// document.getElementById('formsjs').setAttribute("src", "{{ asset('js/forms.js') }}");
 											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.2_demande_analyse_par_analyse_thermique_ATD-ATG_2echE05') `;
 										}
 										else if (text == '3_demande_analyse_par_analyse_thermique_ATD-ATG_E_05'){
-											// document.getElementById('formsjs').setAttribute("src", "{{ asset('js/forms.js') }}");
 											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.3_demande_analyse_par_analyse_thermique_ATD-ATG_E_05') `;
 										}
 										else if (text == '4_demande_analyse_pa_ analyseur_de_surface_specifique_porosimetre_par_la_methode_BET_E_02'){
-											// document.getElementById('formsjs').setAttribute("src", "{{ asset('js/forms.js') }}");
 											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.4_demande_analyse_pa_ analyseur_de_surface_specifique_porosimetre_par_la_methode_BET_E_02') `;
+										}
+										else if (text == '5_demande_analyse_par_microscope_raman_confocal_E01'){
+											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.5_demande_analyse_par_microscope_raman_confocal_E01') `;
+										}
+										else if (text == '7_demande_analyse_par_chromatographie_gaseuze_couplee_a_un_spectrometre_de_masse_E_02'){
+											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.7_demande_analyse_par_chromatographie_gaseuze_couplee_a_un_spectrometre_de_masse_E_02') `;
+										}
+										else if (text == '8_demande_analyse_par_chromatographie_gazeuse_FID_E_02'){
+											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.8_demande_analyse_par_chromatographie_gazeuse_FID_E_02') `;
+										}
+										else if (text == '14_demande_analyse_par_diffractometre_de_rayons_X_E_01'){
+											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.14_demande_analyse_par_diffractometre_de_rayons_X_E_01') `;
+										}
+										else if (text == '35_RMN_etiquettes'){
+											document.getElementById('fd').innerHTML = `	@include('pages.auth.profile.demandes.35_RMN_etiquettes') `;
 										}
 									}
 									function tokenRDV(rdv){
@@ -549,10 +594,6 @@
 								<div class="col-md-2"></div>
 							</div>
 						</div>
-						<div class="col-md-4"></div>
-						<div class="col-md-4 text-center">
-							<button type="submit" class="btn btn-primary w-100 mt-3">Envoyer</button>
-						</div>
 					</div>
 				</form>
 			</section>
@@ -594,7 +635,7 @@
 								<a href="{{ asset('rapports/'.$d->rapport) }}" target="_blank">Téléchanrger Rapport</a>
 						    </td>
 							@else
-							<td class="text-center text-success fs-3"><a><i class="fa-solid fa-plus"
+							<td class="text-center text-success fs-5"><a><i class="fa-solid fa-plus"
 								onclick="ddd({{$d->id}})"></i></a>
 							</td>
 							@endif 
@@ -634,29 +675,6 @@
 				</div>
 				</div>
 			</main>
-
-
-			<main class="content" id="section4" style="display:none;">
-				
-			</main>
-
-
-			<main class="content" id="section5" style="display:none;">
-				
-			</main>
-
-
-			<main class="content" id="section6" style="display:none;">
-				
-			</main>
-
-
-			<main class="content" id="section7" style="display:none;">
-				
-			</main>
-
-					
-
 
 
 
@@ -709,7 +727,7 @@
 					<div class="text-muted">
 						<div class=" text-start">
 							<p class="mb-0 text-center">
-								Center d'Analyse et de Caractérisation FSSM & CIM &copy;2023
+								Center d'Analyse et de Caractérisation FSSM & CIM &copy; 2023
 							</p>
 						</div>
 					</div>
@@ -719,228 +737,6 @@
 	</div>
 
 	<script src="js/app.js"></script>
-
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
-			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-			// Line chart
-			new Chart(document.getElementById("chartjs-dashboard-line"), {
-				type: "line",
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "Sales ($)",
-						fill: true,
-						backgroundColor: gradient,
-						borderColor: window.theme.primary,
-						data: [
-							2115,
-							1562,
-							1584,
-							1892,
-							1587,
-							1923,
-							2566,
-							2448,
-							2805,
-							3438,
-							2917,
-							3327
-						]
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					tooltips: {
-						intersect: false
-					},
-					hover: {
-						intersect: true
-					},
-					plugins: {
-						filler: {
-							propagate: false
-						}
-					},
-					scales: {
-						xAxes: [{
-							reverse: true,
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}],
-						yAxes: [{
-							ticks: {
-								stepSize: 1000
-							},
-							display: true,
-							borderDash: [3, 3],
-							gridLines: {
-								color: "rgba(0,0,0,0.0)"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// Pie chart
-			new Chart(document.getElementById("chartjs-dashboard-pie"), {
-				type: "pie",
-				data: {
-					labels: ["Chrome", "Firefox", "IE"],
-					datasets: [{
-						data: [4306, 3801, 1689],
-						backgroundColor: [
-							window.theme.primary,
-							window.theme.warning,
-							window.theme.danger
-						],
-						borderWidth: 5
-					}]
-				},
-				options: {
-					responsive: !window.MSInputMethodContext,
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					cutoutPercentage: 75
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// Bar chart
-			new Chart(document.getElementById("chartjs-dashboard-bar"), {
-				type: "bar",
-				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-					datasets: [{
-						label: "This year",
-						backgroundColor: window.theme.primary,
-						borderColor: window.theme.primary,
-						hoverBackgroundColor: window.theme.primary,
-						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
-						barPercentage: .75,
-						categoryPercentage: .5
-					}]
-				},
-				options: {
-					maintainAspectRatio: false,
-					legend: {
-						display: false
-					},
-					scales: {
-						yAxes: [{
-							gridLines: {
-								display: false
-							},
-							stacked: false,
-							ticks: {
-								stepSize: 20
-							}
-						}],
-						xAxes: [{
-							stacked: false,
-							gridLines: {
-								color: "transparent"
-							}
-						}]
-					}
-				}
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var markers = [{
-					coords: [31.230391, 121.473701],
-					name: "Shanghai"
-				},
-				{
-					coords: [28.704060, 77.102493],
-					name: "Delhi"
-				},
-				{
-					coords: [6.524379, 3.379206],
-					name: "Lagos"
-				},
-				{
-					coords: [35.689487, 139.691711],
-					name: "Tokyo"
-				},
-				{
-					coords: [23.129110, 113.264381],
-					name: "Guangzhou"
-				},
-				{
-					coords: [40.7127837, -74.0059413],
-					name: "New York"
-				},
-				{
-					coords: [34.052235, -118.243683],
-					name: "Los Angeles"
-				},
-				{
-					coords: [41.878113, -87.629799],
-					name: "Chicago"
-				},
-				{
-					coords: [51.507351, -0.127758],
-					name: "London"
-				},
-				{
-					coords: [40.416775, -3.703790],
-					name: "Madrid "
-				}
-			];
-			var map = new jsVectorMap({
-				map: "world",
-				selector: "#world_map",
-				zoomButtons: true,
-				markers: markers,
-				markerStyle: {
-					initial: {
-						r: 9,
-						strokeWidth: 7,
-						stokeOpacity: .4,
-						fill: window.theme.primary
-					},
-					hover: {
-						fill: window.theme.primary,
-						stroke: window.theme.primary
-					}
-				},
-				zoomOnScroll: false
-			});
-			window.addEventListener("resize", () => {
-				map.updateSize();
-			});
-		});
-	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-			document.getElementById("datetimepicker-dashboard").flatpickr({
-				inline: true,
-				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
-				nextArrow: "<span title=\"Next month\">&raquo;</span>",
-				defaultDate: defaultDate
-			});
-		});
-	</script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 

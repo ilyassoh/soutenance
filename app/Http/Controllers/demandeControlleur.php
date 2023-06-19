@@ -39,6 +39,8 @@ class demandeControlleur extends Controller
         // echo 'user : '.$request->idUser ;echo 'dem : '.$request->idDemande ; echo 'rdv : '.$request->rdv ;
         $td = type_demande::where('id','=',$request->idDemande)->first();
         $chercheur = Chercheur::where('id','=',$request->idUser)->first();
+        $structure = Structures::where('id','=',$chercheur->structures_id)->first();
+        $dirStructure = User::where('id','=',$structure->users_id)->first();
         $templatePath = public_path('./demandes_word/'.$td->id.'_'.$td->fichier_word);
         $templateProcessor = new TemplateProcessor($templatePath);
         $templateProcessor->setValue('nom', $chercheur->nom);
@@ -63,9 +65,10 @@ class demandeControlleur extends Controller
                 break ;
         }
         $templateProcessor->setValue('datechoix', $request->rdv);
-        $templateProcessor->setValue('structure', $chercheur->structure);
-        $templateProcessor->setValue('structure', $chercheur->structure);
+        $templateProcessor->setValue('typeStructure', $structure->type);
+        $templateProcessor->setValue('structure', $structure->intitule);
         $templateProcessor->setValue('etablissement', $chercheur->etablissement);
+        $templateProcessor->setValue('directeur_structure',$dirStructure->name);
         $templateProcessor->setValue('encadrant', $chercheur->encadrant);
         switch ($request->idDemande){
             case '1':
@@ -200,7 +203,6 @@ class demandeControlleur extends Controller
                 $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
                 $templateProcessor->saveAs($modifiedPath);
                 // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($demande->id.'_'.$td->fichier_word));
-                session(['demEnr' => 'Demande Effectué Avec Succès !']); 
                 break ;
             // *******************************************************************
             case '2':
@@ -344,7 +346,6 @@ class demandeControlleur extends Controller
                 $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
                 $templateProcessor->saveAs($modifiedPath);
                 // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($chercheur->id.''.$td->fichier_word));
-                session(['demEnr' => 'Demande Effectué Avec Succès !']); 
                 break ;
             
             // ****************************************************************************************
@@ -489,7 +490,6 @@ class demandeControlleur extends Controller
                 $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
                 $templateProcessor->saveAs($modifiedPath);
                 // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($chercheur->id.''.$td->fichier_word));
-                session(['demEnr' => 'Demande Effectué Avec Succès !']); 
                 break ;
             // *******************************************************************************
             case '4':
@@ -586,13 +586,142 @@ class demandeControlleur extends Controller
                 $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
                 $templateProcessor->saveAs($modifiedPath);
                 // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($chercheur->id.''.$td->fichier_word));
-                session(['demEnr' => 'Demande Effectué Avec Succès !']); 
                 break ;
             // ******************************************************************************
             case '5':
                 // Generer le fichier Word 
                 $listreferences = explode(" | ", $request->listreferences); 
-                $td = typeDemande::where('id','=',$request->idDemande)->first();
+                $td = type_demande::where('id','=',$request->idDemande)->first();
+                $chercheur = Chercheur::where('id','=',$request->idUser)->first();
+                if ($request->nbrEchant != ""){
+                    $templateProcessor->setValue('nbrEchant', $request->nbrEchant);
+                }
+                else {
+                    $templateProcessor->setValue('nbrEchant', '');
+                }
+                if ($request->etatEchant != ""){
+                    $templateProcessor->setValue('etatEchant', $request->etatEchant.'.');
+                }
+                else {
+                    $templateProcessor->setValue('etatEchant', '');
+                }
+                if ($request->toxicite != ""){
+                    $templateProcessor->setValue('toxicite', $request->tocicite);
+                }
+                else {
+                    $templateProcessor->setValue('toxicite', '');
+                }
+                if ($request->Biologique != ""){
+                    $templateProcessor->setValue('Biologique', $request->Biologique.' ,');
+                }
+                else {
+                    $templateProcessor->setValue('Biologique', '');
+                }
+                if ($request->Polymeres != ""){
+                    $templateProcessor->setValue('Polymeres', $request->Polymeres.' ,');
+                }
+                else {
+                    $templateProcessor->setValue('Polymeres', '');
+                }
+                if ($request->sectionPolie != ""){
+                    $templateProcessor->setValue('sectionPolie', $request->sectionPolie.' ,');
+                }
+                else {
+                    $templateProcessor->setValue('sectionPolie', '');
+                }
+                if ($request->coucheMince != ""){
+                    $templateProcessor->setValue('coucheMince', $request->coucheMince.' ,');
+                }
+                else {
+                    $templateProcessor->setValue('coucheMince', '');
+                }
+                if ($request->lameMince != ""){
+                    $templateProcessor->setValue('lameMince', $request->lameMince.' ,');
+                }
+                else {
+                    $templateProcessor->setValue('lameMince', '');
+                }
+                if ($request->autreNatureEchant != ""){
+                    $templateProcessor->setValue('autreNatureEchant', $request->autreNatureEchant);
+                }
+                else {
+                    $templateProcessor->setValue('autreNatureEchant', '');
+                }
+                if ($request->spectralRange != ""){
+                    $templateProcessor->setValue('spectralRange', $request->spectralRange);
+                }
+                else {
+                    $templateProcessor->setValue('spectralRange', '');
+                }
+                if ($request->bands != ""){
+                    $templateProcessor->setValue('bands', $request->bands);
+                }
+                else {
+                    $templateProcessor->setValue('bands', '');
+                }
+                if ($request->spectreRaman != ""){
+                    $templateProcessor->setValue('spectreRaman', 'Oui');
+                }
+                else {
+                    $templateProcessor->setValue('spectreRaman', 'Non');
+                }
+                if ($request->microscopieRaman != ""){
+                    $templateProcessor->setValue('microscopieRaman', 'Oui');
+                }
+                else {
+                    $templateProcessor->setValue('microscopieRaman', 'Non');
+                }
+                if ($request->cdstockage != ""){
+                    $templateProcessor->setValue('cdStockage', $request->cdstockage);
+                }
+                else {
+                    $templateProcessor->setValue('cdStockage', '');
+                }
+                if ($request->rrEchant != ""){
+                    $templateProcessor->setValue('rrEchant', $request->rrEchant);
+                }
+                else {
+                    $templateProcessor->setValue('rrEchant', '');
+                }
+                for ($i = 1; $i <= 10; $i++) {
+                    if (isset($listreferences[$i-1])) {
+                        $templateProcessor->setValue('ref'.$i , $listreferences[$i-1]);
+                    } else {
+                        $templateProcessor->setValue('ref'.$i , "");
+                    }
+                }
+
+               // Stocker Demande
+               $str = Structures::where('id','=',$chercheur->structures_id)->first();
+               $dir = User::where('id','=',$str->users_id)->first();
+               $demande = new Demandes();
+               $demande->chercheurs_id = $request->idUser ;
+               $demande->type_demandes_id = $request->idDemande ;
+               $demande->statu = 'NC' ;
+               $demande->date_choix = $request->rdv ;
+               $demande->rapport = '' ;
+               $demande->directeurs_id = $dir->id ;
+               $demande->secretaires_id = 1 ;
+               $demande->fword = '';
+               $demande->save();
+               $demande->fword = $demande->id.'_'.$td->fichier_word ;
+               $demande->save();
+               $reservation = new Reservations();
+               $machine = Machine::where('id','=',$td->machines_id)->first();
+               $reservation->rdv = $request->rdv ;
+               $reservation->machines_id = $machine->id ;
+               $reservation->save();
+
+               // Envoyer email 
+               $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
+               $templateProcessor->saveAs($modifiedPath);
+               // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($demande->id.'_'.$td->fichier_word));
+               break ;
+            
+            case '7':
+                // Generer le fichier Word 
+                $listreferences = explode(" | ", $request->listreferences); 
+                $td = type_demande::where('id','=',$request->idDemande)->first();
                 $chercheur = Chercheur::where('id','=',$request->idUser)->first();
                 if ($request->nbrEchant != ""){
                     $templateProcessor->setValue('nbrEchant', $request->nbrEchant);
@@ -692,35 +821,38 @@ class demandeControlleur extends Controller
                     }
                 }
 
-                // Stocker Demande
-                $demande = new Demandes();
-                $demande->id_chercheur = $request->idUser ;
-                $demande->id_type_demande = $request->idDemande ;
-                $demande->statu = 'NC' ;
-                $demande->date_choix = $request->rdv ;
-                $demande->rapport = 'Pas de Rapport' ;
-                $demande->id_secretaire = '1' ;
-                $demande->doc_word = '' ;
-                $res = $demande->save();
-                $demande->doc_word = $demande->id.'_'.$td->fichier_word ;
-                $res = $demande->save();
-                $reservation = new Reservations();
-                $reservation->datechoix = $request->rdv ;
-                $reservation->id_machine = $td->id_machine ;
-                $reservation->save();
+               // Stocker Demande
+               $str = Structures::where('id','=',$chercheur->structures_id)->first();
+               $dir = User::where('id','=',$str->users_id)->first();
+               $demande = new Demandes();
+               $demande->chercheurs_id = $request->idUser ;
+               $demande->type_demandes_id = $request->idDemande ;
+               $demande->statu = 'NC' ;
+               $demande->date_choix = $request->rdv ;
+               $demande->rapport = '' ;
+               $demande->directeurs_id = $dir->id ;
+               $demande->secretaires_id = 1 ;
+               $demande->fword = '';
+               $demande->save();
+               $demande->fword = $demande->id.'_'.$td->fichier_word ;
+               $demande->save();
+               $reservation = new Reservations();
+               $machine = Machine::where('id','=',$td->machines_id)->first();
+               $reservation->rdv = $request->rdv ;
+               $reservation->machines_id = $machine->id ;
+               $reservation->save();
 
-                // Envoyer email 
-                $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
-                $templateProcessor->saveAs($modifiedPath);
-                // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($chercheur->id.''.$td->fichier_word));
-                session(['demEnr' => 'Demande Effectué Avec Succès !']); 
-                break ;
+               // Envoyer email 
+               $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
+               $templateProcessor->saveAs($modifiedPath);
+               // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($demande->id.'_'.$td->fichier_word));
+               break ;
             
             default : 
                 return back();
                 break;
         }
-        return redirect('profile');
+        return redirect('profile')->with('success', 'Operation completed successfully.');
     }
 
 
