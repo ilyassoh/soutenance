@@ -14,5 +14,16 @@ class HomeController extends Controller
         $data2=Machine::all() ;
         return view("index",compact('data1','data2'));
     }
+
+    public function machineDetails($idMachine){
+        $machine = Machine::where('id','=',$idMachine)->first();
+        return view('pages.equipements.machine-details', compact('machine'));
+    }
+
+
+    public function mediaDetails($idMedia){
+        $m = publication::where('id','=',$idMedia)->first();
+        return view('pages.media.media-details', compact('m'));
+    }
 }
 

@@ -37,64 +37,31 @@
 
 
 
-  <header id="header" class="fixed-top">
+<header id="header" class="fixed-top">
     @include('partitions.header')
-    <div class="container d-flex align-items-center justify-content-between">
-
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-    </div>
-  </header><!-- End Header -->
 
 
-
-  <main id="main">
-    <h1>Machines</h1>
-    <!-- ======= Portfolio Details Section ======= -->
-    @php
-      $var = $machine->rep_images;
-      $imagePath = str_replace('\\', '/', $var);
-      $imagePath = preg_replace('/\/+/', '/', $imagePath);
-      $imagePath = trim($imagePath, "[]");
-      $imagePath = trim($imagePath, '""');
-    @endphp
-    <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-5">
-            <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide mt-5">
-                  <img src="{{URL('storage/'.$imagePath)}}" alt="">
-                </div>
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="portfolio-info">
-              <h3>{{ $machine->label }}</h3>
-              <ul>
-                <li><strong>Designation</strong> : {{ $machine->designation }}</li>
-                <li><strong>Statu</strong> : {{ $machine->Statu}}</li>
-              </ul>
-            </div>
-            <div class="portfolio-description">
-              <h2>Description </h2>
-              <p>
-              {{ $machine->description }}
-              </p>
-            </div>
-          </div>
-
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            @php
+                $var = $m->photo;
+                $imagePath = str_replace('\\', '/', $var);
+                $imagePath = preg_replace('/\/+/', '/', $imagePath);
+                $imagePath = trim($imagePath, "[]");
+                $imagePath = trim($imagePath, '""');
+            @endphp
+            <img src="{{URL('storage/'.$imagePath)}}" alt="" width="90%" class="rounded-5">
         </div>
+        <div class="col-md-6  mt-4">
+            <h2>{{ $m->titre }}</h2>
+            <p class="mt-3">{{ $m->description }}</p>
+        </div>
+    </div>
+</div>
 
-      </div>
-    </section><!-- End Portfolio Details Section -->
 
-  </main><!-- End #main -->
+
 
   <!-- ======= Footer ======= -->
   @include('partitions.footer')

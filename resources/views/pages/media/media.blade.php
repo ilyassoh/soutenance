@@ -45,20 +45,24 @@
 	        <div class="heading">
 	          <h2>MEDIA</h2>
 	        </div>
-			
 	        <div class="row">
 			@foreach ($data as $media)
 			@if ($media->type =='radio2')
 	            <div class="col-md-6 col-lg-4">
+				<a href="{{ route('media-details', ['idMedia' => $media->id]) }}">
 	                <div class="card border-0 transform-on-hover">
-	                	<a class="lightbox" href="../img/image1.jpg">
-	                		<img src="{{ asset('storage/' . $media->photo) }}"  alt="Card Image" class="card-img-top">
-	                	</a>
+	                	<div>
+	                		<img src="{{ asset('storage/' . $media->photo) }}"  alt="Card Image" class="card-img-top" height="250">
+	                	</div>
 	                    <div class="card-body">
 	                        <h6><a href="#">{{$media->titre}}</a></h6>
-	                        <p class="text-muted card-text">{{$media->description}}</p>
+							@php 
+							$d = Str::limit($media->description, 50) ;
+							@endphp
+	                        <p class="text-muted card-text">{{ $d }}</p>
 	                    </div>
 	                </div>
+				</a>
 	            </div>
 				@endif
 				@endforeach

@@ -9,46 +9,27 @@
 </div>
 
 @if (count($data2)>0)
-  <!-- Plus Utilisables Machines  -->
-  <div class="container-fluid row text-center mt-5">
-
-    <div class="col-md-1"></div>
-    @for ($i=count($data2)-1; $i>count($data2)-2;  $i--)
-    <div class="col-md-3 mt-5 mb-3">
-      <img src="{{URL('imgs/machine.png')}}" alt="Machine" width="150px"><br>
-      <h2>{{$data2[$i]->label}}</h2>
-      <p>
-        {{$data2[$i]->designation}}
-      </p>
-      <button class="btn btn-primary px-3 fw-bold">Details </button>
-    </div>
+<div class="container text-center mt-5 justify-content-center">
+  <div class="row justify-content-center">
+    @for ($i=count($data2)-1; $i>count($data2)-4;  $i--)
+      <div class="col-md-4">
+        <img src="{{URL('imgs/machine.png')}}" alt="Machine" width="150px"><br>
+        <h2>{{$data2[$i]->label}}</h2>
+        <p>
+          @php 
+            $d = Str::limit($data2[$i]->designation, 28) ;
+          @endphp
+          {{$d}}
+        </p>
+        <button class="btn btn-primary px-3 fw-bold">Details </button>
+      </div>
     @endfor
-
-    @for ($i=count($data2)-2; $i>count($data2)-3;  $i--)
-    <div class="col-md-4 mb-3">
-      <img src="{{URL('imgs/machine.png')}}" alt="Machine" width="150px"><br>
-      <h2>{{$data2[$i]->label}}</h2>
-      <p> 
-      {{$data2[$i]->designation}}
-      </p>
-      <button class="btn btn-primary px-3 fw-bold">Details </button>
-    </div>
-  @endfor
-    @for ($i=count($data2)-2; $i>count($data2)-3;  $i--)
-    <div class="col-md-3 mt-5 mb-3">
-      <img src="{{URL('imgs/machine.png')}}" alt="Machine" width="150px"><br>
-      <h2>{{$data2[$i]->label}}</h2>
-      <p>
-      {{$data2[$i]->designation}}
-      </p>
-      <button class="btn btn-primary px-3 fw-bold">Details </button>
-    </div>
-    @endfor
-    <div class="col-md-1"></div>
   </div>
+  
+</div>
 @endif
 
-@if (count($data2)>0)
+@if (count($data1)>0)
   <!-- Publiques Publications -->
   <div class="container col-xxl-8 px-4 py-5">
   @for ($i=count($data2)-2; $i>count($data2)-3;  $i--)

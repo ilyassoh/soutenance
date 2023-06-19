@@ -76,22 +76,25 @@
                 <div class="work-box" style="border: 2px; border-color:#D3D3D3; border-style: solid; border-radius:5px;">
                   <a href="{{URL('storage/'.$imagePath)}}" data-gallery="portfolioGallery" class="portfolio-lightbox">
                     <div class="work-img">
-                      <img src="{{URL('storage/'.$imagePath)}}" alt="" class="img-fluid w-100">
+                      <img src="{{URL('storage/'.$imagePath)}}" alt="" class="" height="250">
                     </div>
                   </a>
                   <div class="work-content">
                     <div class="row">
                       <div class="col-sm-8">
-                        <h2 class="w-title">
-                          {{$row['designation']}}
-                        </h2>
+                        <h3 class="w-title">
+                          @php
+                            $d = Str::limit($row['designation'], 10);
+                          @endphp
+                          {{$d}}
+                        </h3>
                         <div class="w-more">
                           <span class="w-ctegory">{{$row['label']}}</span>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="w-like">
-                          <a href="{{route('machine-details')}}"> <span class="bi bi-plus-circle"></span></a>
+                          <a href="{{route('machine-details', ['idMachine' => $row['id']])}}"> <span class="bi bi-plus-circle"></span></a>
                         </div>
                       </div>
                     </div>

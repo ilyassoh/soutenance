@@ -66,9 +66,8 @@ Route::post('/Non_Realise-demande',[demandeController::class,'Non_RealiseDemande
 
 
 // Route de page machine-details
-Route::get('/machine-details', function (){
-    return view('pages.equipements.machine-details');
-})->name('machine-details');
+Route::get('/machine-details/{idMachine}',[HomeController::class,'machineDetails'])->name('machine-details');
+Route::get('/media-details/{idMedia}',[HomeController::class,'mediaDetails'])->name('media-details');
 
 
 
