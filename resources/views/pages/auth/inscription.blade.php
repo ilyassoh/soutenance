@@ -130,9 +130,6 @@
         </form>
     </div>
 
-    <!-- include footer  -->
-    @include('../partitions.footer')
-
     
 </body>
 </html>

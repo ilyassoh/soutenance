@@ -1,226 +1,138 @@
-<h4 class="mb-4">CONDITIONS D’ANALYSE ET IDENTIFICATION DES ECHANTILLONS</h4>
-<div class="mb-3">
-  <label for="typeAnalyse" class="form-label">Type d’analyse:</label>
-  <select class="form-select" id="typeAnalyse" name="typeAnalyse">
-    <option value="qualitative">Qualitative</option>
-    <option value="quantitative">Quantitative</option>
+<div class="form-group">
+  <label for="nombre-echantillons">Nombre d'échantillons :</label>
+  <input type="number" class="form-control" id="nbrEchantillons" name="nbrEchantillons">
+</div>
+<div class="form-group">
+  <label for="nombre-repetitions">Nombre de répétitions si nécessaire :</label>
+  <input type="number" class="form-control" id="nbrRepetitions" name="nbrRepetitions">
+</div>
+<div class="form-group">
+  <label for="typeAnalyse">Type d'analyse :</label>
+  <select class="form-control" id="typeAnalyse" name="typeAnalyse">> 
+    <option value="Qualitative">Qualitative</option>
+    <option value="Quantitative">Quantitative</option>
   </select>
-  <div id="standardHelp" class="form-text">*Le standard est à fournir par le demandeur</div>
 </div>
-<div class="row">
-  <div class="col-md-6">
-    <div class="mb-3">
-      <label for="nbrEchantillons" class="form-label">Nombre d’échantillons:</label>
-      <input type="number" class="form-control" id="nbrEchantillons" name="nbrEchantillons">
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="mb-3">
-      <label for="nbrRepetitions" class="form-label">Nombre de répétitions si nécessaire:</label>
-      <input type="number" class="form-control" id="nbrRepetitions" name="nbrRepetitions">
-    </div>
-  </div>
+<div class="form-group">
+  <label for="nombre-standards">Nombre de standards (à fournir par le demandeur) :</label>
+  <input type="number" class="form-control" id="nbrStandards" name="nbrStandards">
 </div>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="mb-3">
-      <label for="tempInjecteur" class="form-label">Température de l’injecteur (°C):</label>
-      <input type="text" class="form-control" id="tempInjecteur" name="tempInjecteur">
-    </div>
-
-    <div class="mb-3">
-      <label for="debitGazVecteur" class="form-label">Débit du gaz vecteur (ml/min):</label>
-      <input type="text" class="form-control" id="debitGazVecteur" name="debitGazVecteur">
-    </div>
+<div class="form-group">
+  <label for="temperature-injecteur">Température de l'injecteur :</label>
+  <input type="text" class="form-control" id="tmpInjecteur" name="tmpInjecteur">
+</div>
+<div class="form-group">
+  <label for="temperature-injecteur">Température de Détecteur :</label>
+  <input type="text" class="form-control" id="tmpDetecteur" name="tmpDetecteur">
+</div>
+<div class="form-group">
+  <label for="nature-echantillons">Nature des échantillons :</label>
+  <input type="text" class="form-control" id="natureEchantillons" name="natureEchantillons">
+</div>
+<div class="form-group">
+  <label for="molecules-identifier">Molécules à identifier :</label>
+  <input type="text" class="form-control" id="mols" name="mols">
+</div>
+<div class="form-group">
+  <label for="debit-gaz-vecteur">Débit du gaz vecteur au niveau de la colonne (en ml/min) :</label>
+  <input type="number" class="form-control" id="debitGazNiveau" name="debitGazNiveau">
+</div>
+<div class="form-group">
+  <label for="type-echantillon">Type de l'échantillon :</label>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" id="pure" value="Pure" name="pure">
+    <label class="form-check-label" for="type-echantillon-pure">
+      Pure
+    </label>
   </div>
-
-  <div class="col-md-6">
-    <div class="mb-3">
-      <label for="pressionGazVecteur" class="form-label">Pression du gaz vecteur (kPa):</label>
-      <input type="text" class="form-control" id="pressionGazVecteur" name="pressionGazVecteur">
-    </div>
-
-    <div class="mb-3">
-      <label for="typeEchantillon" class="form-label">Type de l’échantillon:</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="typeEchantillon" id="typeEchantillonPure" value="pure">
-        <label class="form-check-label" for="typeEchantillonPure">Pure</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="typeEchantillon" id="typeEchantillonDilue" value="dilue">
-        <label class="form-check-label" for="typeEchantillonDilue">Dilué dans un solvant</label>
-      </div>
-      <input type="text" class="form-control mt-2" id="solvantEchantillon" name="solvantEchantillon" placeholder="Préciser le solvant dans lequel est soluble">
-    </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" id="dilue" name="dilue" value="Dilue">
+    <label class="form-check-label" for="type-echantillon-dilue">
+      Dilué dans un solvant
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="solvent-utilise">Veuillez préciser le solvant utilisé :</label>
+    <input type="text" class="form-control" id="solvant" name="solvant">
   </div>
 </div>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="mb-3">
-      <label for="volEchantillon" class="form-label">Volume de l’échantillon à injecter (µl):</label>
-      <input type="text" class="form-control" id="volEchantillon" name="volEchantillon">
-    </div>
-
-    <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" id="echantillonVisqueux" name="echantillonVisqueux">
-      <label class="form-check-label" for="echantillonVisqueux">Echantillon visqueux</label>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    <div class="mb-3">
-      <label for="tempTransfert" class="form-label">Température de la ligne de transfert (°C):</label>
-      <input type="text" class="form-control" id="tempTransfert" name="tempTransfert">
-    </div>
-
-    <div class="mb-3">
-      <label for="toxicite" class="form-label">Toxicité:</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="toxicite" id="toxiciteToxiques" value="toxiques">
-        <label class="form-check-label" for="toxiciteToxiques">Toxiques</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="toxicite" id="toxiciteNonToxiques" value="non-toxiques">
-        <label class="form-check-label" for="toxiciteNonToxiques">Non toxiques</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="toxicite" id="toxiciteRadioactifs" value="radioactifs">
-        <label class="form-check-label" for="toxiciteRadioactifs">Radioactifs</label>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="mb-3">
-  <label for="natureEchantillons" class="form-label">Nature des échantillons:</label>
-  <textarea class="form-control" id="natureEchantillons" name="natureEchantillons" rows="3"></textarea>
+<label for="toxicite" class="form-label mb-1">Toxicité:</label>
+<select class="form-select" id="toxicite" name="toxicite">
+    <option value="Toxiques">Toxiques</option>
+    <option value="Non toxiques">Non toxiques</option>
+    <option value="Radioactifs">Radioactifs</option>
+</select>
 </div>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="mb-3">
-      <label for="timeMS" class="form-label">Time (min):</label>
-      <input type="text" class="form-control" id="timeMS" name="timeMS">
+<div class="form-group">
+  <h3>Gradient de température de la colonne :</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <label for="">Vitesse de montée en T° : </label>
+      <input type="text" id="v" class="form-control w-100">
     </div>
-    <div class="mb-3">
-      <label for="stopMS" class="form-label">Stop after (min):</label>
-      <input type="text" class="form-control" id="stopMS" name="stopMS">
+    <div class="col-md-3">
+      <label for="">Température : </label>
+      <input type="text" id="tp" class="form-control w-100">
+    </div>
+    <div class="col-md-3">
+      <label for="">Temps : </label>
+      <input type="text" id="t" class="form-control w-100">
+    </div>
+    <div class="col-md-2 text-success">
+      <a class="btn btn-success text-light fw-b fs-5 mt-4 w-100 h-50 pb-2" onclick="ajouterGrad()"><i class="fa-solid fa-plus"></i></a>
     </div>
   </div>
-
-  <div class="col-md-6">
-    <div class="mb-3">
-      <label for="formuleMolecules" class="form-label">Veuillez préciser la formule brute des molécules qui vous intéressent (si vous connaissez):</label>
-      <input type="text" class="form-control" id="formuleMolecules" name="formuleMolecules">
-    </div>
-    <div class="mb-3">
-      <label for="intervalleMasse" class="form-label">Un intervalle de masse:</label>
-      <div class="row">
-        <div class="col-md-6">
-          <input type="text" class="form-control" id="masseMin" name="masseMin" placeholder="De">
-        </div>
-        <div class="col-md-6">
-          <input type="text" class="form-control" id="masseMax" name="masseMax" placeholder="À">
-        </div>
+</div>
+<div class="form-group mt-3 text-center fw-b" id="containerGrads"></div>
+<input type="hidden" type="text" name="listgrads" id="listgrads">
+<div class="form-group mt-3">
+<small>NB : c'est le numéro de l'échantillon qui sera affiché au niveau du rapport d'analyse. Le nombre maximal d'échantillon à analyser par demande est 10. Les demandeurs ne peuvent déposer une nouvelle demande qu'après traitement de la première.</small>
+</div>
+<div class="mt-2 row pt-2">
+<h4>Veuillez nommer vos échantillons avec vos initiales + un chiffre, de manière croissante et sans interruption.</h4>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="taskInput" placeholder="Nommer vos échantillions">
+  <span class="btn btn-primary" onclick="addTask()">Ajouter</span>
+</div> 
+<ul class="list-group mb-3">
+    <div id="taskList" class="row"></div>
+</ul>
+<input type="hidden" type="text" name="listreferences" id="listreferences">
+</div>
+  <p>NB: c'est le numéro de l'échantillon qui sera affiché au niveau du rapport d'analyse.</p>
+</div>
+<div class="col-md-12 mb-3">
+<label for="conditions-stockage fw-b" class="form-label">CONDITIONS DE STOCKAGE DES ECHANTILLONS AVANT ANALYSE :</label>
+<textarea class="form-control" id="cdstockage" name="cdstockage" rows="4"></textarea>
+</div>
+<div class="col-md-12">
+<label for="chauffage" class="form-label fw-b">Voulez vous récupérer le reste des échantillons (s’il en reste) après analyse :</label>
+<select class="form-select" id="rrEchant" name="rrEchant">
+      <option class="text-center" value="Oui">Oui</option>
+      <option class="text-center" value="Non">Non</option>
+  </select>
+</div>
+<p>Si oui, la récupération du reste des échantillons (s'il en reste) doit se faire au maximum 15 jours après la réception des résultats d'analyse. Dépassant ce délai, ils seront détruits. Si aucune case
+<div class="row justify-content-center">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Envoyer
+  </button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="massesExactes" class="form-label">Ou des masses exactes (uma):</label>
-      <input type="text" class="form-control" id="massesExactes" name="massesExactes">
-    </div>
+      <div class="modal-body">
+          Souhaitez-vous confirmer l'envoi de votre demande ?
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+          <button type="submit" class="btn btn-primary">Oui Envoyer</button>
+      </div>
+      </div>
   </div>
-</div>
-
-<div class="mb-4">
-  <label for="gradientTempColonne" class="form-label">Gradient de température de la colonne:</label>
-  <textarea class="form-control" id="gradientTempColonne" name="gradientTempColonne" rows="3"></textarea>
-</div>
-
-<div class="mb-4">
-  <label for="refEchantillons" class="form-label">Veuillez indiquer la référence de vos échantillons:</label>
-  <textarea class="form-control" id="refEchantillons" name="refEchantillons" rows="3"></textarea>
-</div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Vitesse de montée en T°</th>
-      <th scope="col">Température</th>
-      <th scope="col">Temps</th>
-      <th scope="col">N° échantillon</th>
-      <th scope="col">Réf échantillon</th>
-      <th scope="col">N° échantillon</th>
-      <th scope="col">Réf échantillon</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><input type="text" class="form-control" name="vitesseMontee[]" /></td>
-      <td><input type="text" class="form-control" name="temperature[]" /></td>
-      <td><input type="text" class="form-control" name="temps[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-    </tr>
-    <tr>
-      <td><input type="text" class="form-control" name="vitesseMontee[]" /></td>
-      <td><input type="text" class="form-control" name="temperature[]" /></td>
-      <td><input type="text" class="form-control" name="temps[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-    </tr>
-    <tr>
-      <td><input type="text" class="form-control" name="vitesseMontee[]" /></td>
-      <td><input type="text" class="form-control" name="temperature[]" /></td>
-      <td><input type="text" class="form-control" name="temps[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-    </tr>
-    <tr>
-      <td><input type="text" class="form-control" name="vitesseMontee[]" /></td>
-      <td><input type="text" class="form-control" name="temperature[]" /></td>
-      <td><input type="text" class="form-control" name="temps[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-    </tr>
-    <tr>
-      <td><input type="text" class="form-control" name="vitesseMontee[]" /></td>
-      <td><input type="text" class="form-control" name="temperature[]" /></td>
-      <td><input type="text" class="form-control" name="temps[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="numEchantillon[]" /></td>
-      <td><input type="text" class="form-control" name="refEchantillon[]" /></td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="form-text mb-4">
-  *La présente demande dûment remplie doit être obligatoirement retournée au CAC jointe à une méthode normalisée ou un article scientifique adapté à la phase stationnaire : 5% diphenyl / 95% dimethylpolysiloxane.<br>
-  NB: c’est le numéro de l’échantillon qui sera affiché au niveau du rapport d’analyse.<br>
-  Le nombre maximal d’échantillon à analyser par demande est 10. Les demandeurs ne peuvent déposer une nouvelle demande qu’après traitement de la première.
-</div>
-
-<div class="mb-3">
-  <label for="demandeurNom" class="form-label">Nom du demandeur:</label>
-  <input type="text" class="form-control" id="demandeurNom" name="demandeurNom">
-</div>
-
-<div class="mb-3">
-  <label for="demandeurEmail" class="form-label">Email du demandeur:</label>
-  <input type="email" class="form-control" id="demandeurEmail" name="demandeurEmail">
-</div>
-
-<div class="mb-3">
-  <label for="demandeurTelephone" class="form-label">Téléphone du demandeur:</label>
-  <input type="text" class="form-control" id="demandeurTelephone" name="demandeurTelephone">
+  </div>
 </div>

@@ -19,6 +19,9 @@
 </head>
 <body>
     @include('partitions.header')
+    <script>
+		document.getElementById('home').setAttribute('id', 'activeLink')
+	</script>
     @include('pages.home.home', ['data1' => $data1, 'data2' => $data2])
     @include('pages.home.sponsors')
     @include('partitions.footer')

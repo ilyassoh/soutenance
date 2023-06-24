@@ -18,8 +18,16 @@ use TCG\Voyager\Events\BreadImagesDeleted;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use App\Models\demande;
+use App\Models\Structures;
 use App\Models\chercheur;
+use App\Models\type_demande;
+use App\Models\machine;
 
+use Illuminate\Support\Facades\Mail;
+Use App\Mail\realisableMailer;
+Use App\Mail\nonRealisableMailer;
+Use App\Mail\dirRefusMailer;
+Use App\Mail\traiteeMailer;
 
 class demandeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
 {
@@ -190,7 +198,10 @@ class demandeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
         }
         
         $demandes = demande::with('chercheurs')->get(); 
-        
+        $structures = Structures::all();
+        $chercheurs = chercheur::all();
+        $tds = type_demande::all();
+        $machines = machine::all();
         return Voyager::view($view, compact(
             'actions',
             'dataType',
@@ -207,15 +218,19 @@ class demandeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
             'usesSoftDeletes',
             'showSoftDeleted',
             'showCheckboxColumn',
-            'demandes'
+            'demandes',
+            'structures',
+            'chercheurs',
+            'tds',
+            'machines'
         ));
 
         
     
     }
 
-    public function accepterDemande(Request $request){
-        $demande = demande::where('id','=',$request->idDTU)->first();
+    public function accepterDemande($id){
+        $demande = demande::where('id','=',$id)->first();
         if ($demande){
             $demande->statu = 'C' ;
             $demande->save();
@@ -223,33 +238,52 @@ class demandeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
         return back();
     }
 
-    public function refuserDemande(Request $request){
-        $demande = demande::where('id','=',$request->idR)->first();
+    public function refuserDemande($id){
+        $demande = demande::where('id','=',$id)->first();
         if ($demande){
             $demande->statu = 'D' ;
             $demande->save();
+            $chercheur = chercheur::where('id','=',$demande->chercheurs_id)->first();
+            $dname = substr($demande->fword, strpos($demande->fword, "_") + 1, strpos($demande->fword, ".") - strpos($demande->fword, "_") - 1);
+            Mail::to($chercheur->email)->send(new dirRefusMailer($chercheur->email,$chercheur->nom,$dname));
         }
         return back();
     }
 
-    public function RealiseDemande(Request $request){
-        $demande = demande::where('id','=',$request->idDTU)->first();
+    public function RealiseDemande($id){
+        $demande = demande::where('id','=',$id)->first();
         if ($demande){
-            $demande->statu = 'R' ;
+            $demande->statu = 'R';
             $demande->save();
+            $chercheur = chercheur::where('id','=',$demande->chercheurs_id)->first();
+            $dname = substr($demande->fword, strpos($demande->fword, "_") + 1, strpos($demande->fword, ".") - strpos($demande->fword, "_") - 1);
+            Mail::to($chercheur->email)->send(new realisableMailer($chercheur->email,$demande->date_choix,$chercheur->nom,$dname));
         }
         return back();
     }
-
+    public function TraiteDemande($id){
+        $demande = demande::where('id','=',$id)->first();
+        if ($demande){
+            $demande->statu = 'T' ;
+            $demande->save();
+            $chercheur = chercheur::where('id','=',$demande->chercheurs_id)->first();
+            $dname = substr($demande->fword, strpos($demande->fword, "_") + 1, strpos($demande->fword, ".") - strpos($demande->fword, "_") - 1);
+            Mail::to($chercheur->email)->send(new traiteeMailer($chercheur->email,$demande->date_choix,$chercheur->nom,$dname));
+        }
+        return back();
+    }
     public function Non_RealiseDemande(Request $request){
         $demande = demande::where('id','=',$request->idR)->first();
         if ($demande){
             $demande->statu = 'NR' ;
+            $demande->commentaire = $request->commentaire ;
             $demande->save();
+            $chercheur = chercheur::where('id','=',$demande->chercheurs_id)->first();
+            $dname = substr($demande->fword, strpos($demande->fword, "_") + 1, strpos($demande->fword, ".") - strpos($demande->fword, "_") - 1);
+            Mail::to($chercheur->email)->send(new nonRealisableMailer($chercheur->email,$demande->commentaire,$chercheur->nom,$dname));
         }
         return back();
     }
-
     //***************************************
     //                _____
     //               |  __ \
@@ -261,13 +295,10 @@ class demandeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
     //  Read an item of our Data Type B(R)EAD
     //
     //****************************************
-
     public function show(Request $request, $id)
     {
         $slug = $this->getSlug($request);
-
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
-
         $isSoftDeleted = false;
 
         if (strlen($dataType->model_name) != 0) {
@@ -312,8 +343,8 @@ class demandeController extends \TCG\Voyager\Http\Controllers\VoyagerBaseControl
         }
         
         $demandes = demande::all(); 
-
-        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted','demandes'));
+        $structures = Structures::all();
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'isSoftDeleted','demandes','structures'));
     }
 
     //***************************************

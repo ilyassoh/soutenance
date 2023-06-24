@@ -27,14 +27,11 @@
     <!-- Slide  -->
     <div class="site-header position-relative overflow-hidden p-5 p-md-5 text-center bg-light">
         <div class="col-md-5 p-lg-5 mx-auto">
-            <h2 class="lead fw-bolder text-light mt-5 pt-5 fs-1">
-                Centre d'Analyse et de Caractérisation
-            </h2>
         </div>
     </div>
 
     <!-- Section d'histoire  -->
-    <div class="accordion container text-center my-5" id="accordionExample">
+    <!-- <div class="accordion container text-center my-5" id="accordionExample">
       <h2 class="my-3" >Histoire de CAC</h2>
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
@@ -72,37 +69,43 @@
           </div>
         </div>
       </div>
+    </div> -->
+    <div class="accordion container text-center my-5" id="accordionExample">
+      <h2 class="my-3" >A Propos de CAC</h2>
+      <p>
+      Le Centre d'Analyse et de Caractérisation (C.A.C) est un service commun de l'Université Cadi Ayyad (UCA) 
+      rattaché à la Cité d'Innovation. Il constitue une plateforme technologique, mise en place par 
+      l'UCA dans le cadre du programme de développement de sa recherche scientifique. 
+      Il est ouvert à l'ensemble des structures de recherche de l'UCA et au monde socio-économique.
+      </p>
     </div>
 
     <!--Section des Services  -->
     <section id="services" class="my-5 text-center">
       <div class="container">
-        <h2 class="text-center mb-2">Our Services</h2>
+        <h2 class="text-center mb-2">Nos Services</h2>
         <div class="row">
-          <div class="col-md-4 mb-5">
+          <div class="col-md-4 mb-5" >
             <div class="card">
-              <div class="card-body">
+              <div class="card-body" style="min-height:150px;">
                 <h3 class="card-title">Service 1</h3>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at libero libero.</p>
-                <a href="#" class="btn btn-primary">Learn More</a>
+                <p class="card-text">Mutualisation et mise à la disposition de moyens d'analyses au profit des chercheurs et du tissu socio-économique.</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-5">
+          <div class="col-md-4 mb-5" >
             <div class="card">
-              <div class="card-body">
+              <div class="card-body" style="min-height:150px;">
                 <h3 class="card-title">Service 2</h3>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at libero libero.</p>
-                <a href="#" class="btn btn-primary">Learn More</a>
+                <p class="card-text">Promotion de l'activité scientifique et technologique.</p>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-5">
+          <div class="col-md-4 mb-5" >
             <div class="card">
-              <div class="card-body">
+              <div class="card-body" style="min-height:150px;">
                 <h3 class="card-title">Service 3</h3>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at libero libero.</p>
-                <a href="#" class="btn btn-primary">Learn More</a>
+                <p class="card-text">Promotion de l'activité scientifique et technologique.</p>
               </div>
             </div>
           </div>
@@ -118,7 +121,7 @@
     <!-- Section de équipe de CAC  -->
     <div class="container">
       <div class="row blog">
-        <h2 class="center mx-auto text-center py-4">Our Team Members</h2>
+        <h2 class="center mx-auto text-center py-4">La Structure Organisationnelle</h2>
         <div class="col-md-12">
           <div id="blogCarousel" class="carousel slide" data-ride="carousel">
             <ol class="invisible carousel-indicators">
@@ -126,147 +129,45 @@
               <li data-target="#blogCarousel" data-slide-to="1"></li>
             </ol>
             <!-- Carousel items -->
-            <div class="carousel-inner  my-3">
-              <div class="carousel-item active">
-                <div class="row">
-                  <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="our-team">
-                      <div class="pic">
-                        <img src="https://i.ibb.co/L8Pj1mg/o6EuTCT6.jpg">
-                      </div>
-                      <div class="team-content">
-                        <h3 class="title">Dana Robins</h3>
-                        <span class="post">Marketing Consultant</span>
-                      </div>
-                        <ul class="social">
-                          <li>
-                            <a href="#" class="float-end px-2 text-decoration-none"><b>Contact</b></a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                      <div class="our-team">
-                        <div class="pic">
-                          <img src="https://i.ibb.co/L8Pj1mg/o6EuTCT6.jpg">
-                        </div>
-                        <div class="team-content">
-                          <h3 class="title">John Doe</h3>
-                          <span class="post">Marketing Consultant</span>
-                        </div>
-                          <ul class="social">
-                            <li>
-                              <a href="#" class="float-end px-2 text-decoration-none"><b>Contact</b></a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="our-team">
-                          <div class="pic">
-                            <img src="https://i.ibb.co/L8Pj1mg/o6EuTCT6.jpg">
-                          </div>
-                          <div class="team-content">
-                            <h3 class="title">Markus Baas</h3>
-                            <span class="post">Financial Expert</span>
-                          </div>
-                          <ul class="social">
-                            <li>
-                              <a href="#" class="float-end px-2 text-decoration-none"><b>Contact</b></a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="our-team">
-                          <div class="pic">
-                              <img src="https://i.ibb.co/L8Pj1mg/o6EuTCT6.jpg">
-                          </div>
-                          <div class="team-content">
-                              <h3 class="title">Sophia Lee</h3>
-                              <span class="post">Customer Support</span>
-                          </div>
-                          <ul class="social">
-                              <li>
-                                <a href="#" class="float-end px-2 text-decoration-none "><b>Contact</b></a>
-                              </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Carousel items -->
             <div class="carousel-inner my-3">
               <div class="carousel-item active">
-                <div class="row">
-                  <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="our-team">
-                      <div class="pic">
-                        <img src="https://i.ibb.co/L8Pj1mg/o6EuTCT6.jpg">
-                      </div>
-                      <div class="team-content">
-                        <h3 class="title">Dana Robins</h3>
-                        <span class="post">Marketing Consultant</span>
-                      </div>
-                        <ul class="social">
-                          <li>
-                            <a href="#" class="float-end px-2 text-decoration-none"><b>Contact</b></a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                      <div class="our-team">
-                        <div class="pic">
-                          <img src="https://i.ibb.co/L8Pj1mg/o6EuTCT6.jpg">
-                        </div>
-                        <div class="team-content">
-                          <h3 class="title">John Doe</h3>
-                          <span class="post">Marketing Consultant</span>
-                        </div>
-                          <ul class="social">
-                            <li>
-                              <a href="#" class="float-end px-2 text-decoration-none"><b>Contact</b></a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+                <div class="row justify-content-center">
+                      @foreach ($users as $user)
                       <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="our-team">
+                        <div class="our-team  rounded-4">
                           <div class="pic">
-                            <img src="https://i.ibb.co/L8Pj1mg/o6EuTCT6.jpg">
+                              <img src="{{ asset('storage/' . $user->avatar) }}">
                           </div>
                           <div class="team-content">
-                            <h3 class="title">Markus Baas</h3>
-                            <span class="post">Financial Expert</span>
+                              <h3 class="title">{{ $user->name ;}}</h3>
+                              @php
+                                switch ($user->role_id) {
+                                case "1":
+                                  $description  =  "Directeur de CAC.";
+                                    break;
+                                case "4":
+                                  $description  =  "Secrétaire générale.";
+                                    break;
+                                case "5":
+                                  foreach($machines as $m){
+                                    if ($user->id == $m->users_id){
+                                      $machine = $m ;
+                                    }
+                                  }
+                                  $description  =  "Responsable de La Machine ".$machine->label;
+                                    break;
+                                default:
+                                  $description  =  "Inkonnu (e)";
+                                    break;
+                                }
+                              @endphp
+                              <span class="post">{{ $description ;}}</span>
                           </div>
-                          <ul class="social">
-                            <li>
-                              <a href="#" class="float-end px-2 text-decoration-none"><b>Contact</b></a>
-                            </li>
-                          </ul>
+                          <a class="social pb-3 text-decoration-none text-lignt fw-b fs-5" href="mailto:{{$user->email}}">Contact</a>
                         </div>
                       </div>
-                      <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="our-team">
-                          <div class="pic">
-                              <img src="https://i.ibb.co/L8Pj1mg/o6EuTCT6.jpg">
-                          </div>
-                          <div class="team-content">
-                              <h3 class="title">Sophia Lee</h3>
-                              <span class="post">Customer Support</span>
-                          </div>
-                          <ul class="social">
-                              <li>
-                                <a href="#" class="float-end px-2 text-decoration-none "><b>Contact</b></a>
-                              </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                      @endforeach
+                    </div> 
                   </div>
                 </div>
               </div>

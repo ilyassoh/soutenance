@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\publication;
+use App\Models\recherche;
+use App\Models\chercheur;
 use App\Http\Requests\StorepubRequest;
 use App\Http\Requests\UpdatepubRequest;
 
@@ -16,8 +17,9 @@ class rechercheController extends Controller
      */
     public function index()
     {
-        $data=publication::all() ;
-        return view("pages.recherches.recherches",compact('data'));
+        $recherches=recherche::all();
+        $chercheurs=chercheur::all();
+        return view("pages.recherches.recherches",compact('recherches','chercheurs'));
        
     }
 }

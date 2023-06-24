@@ -32,45 +32,42 @@
 <div class="container">
     <div class="form">
         <div class="contact-info">
-            <h3 class="title">Let's get in touch</h3>
-            <p class="text"> Contact us with the following details. and fillup the form with the details. </p>
+            @if(session('success'))
+                <span class="alert alert-success text-center mb-5">
+                    {{ session('success') }}
+                </span>
+            @endif
+            <h3 class="title mt-5">Countactez-Nous</h3>
+            <p class="text">Veuillez nous contacter en utilisant les coordonnées suivantes et remplir le formulaire avec les informations demandées  </p>
             <div class="info">
                 <div class="social-information"> <i class="fa fa-map-marker"></i>
-                    <p>NPM,NY,USA</p>
+                    <p>{{$parametres[0]['location']}}</p>
                 </div>
-                <div class="social-information"> <i class="fa fa-envelope-o"></i>
-                    <p>contact@bbbootstrap.com</p>
+                <div class="social-information"> <i class="fa-solid fa-envelope"></i>
+                    <p>{{$parametres[0]['Contact_email']}}</p>
                 </div>
                 <div class="social-information"> <i class="fa fa-mobile-phone"></i>
-                    <p>+1 989 989 9898 </p>
-                </div>
-            </div>
-            <div class="social-media">
-                <p>Connect with us :</p>
-                <div class="social-icons text-center"> 
-                    <a href="#"><i class="fa-brands fa-square-facebook fs-3 mx-2"></i></a> 
-                    <a href="#"><i class="fa-brands fa-twitter fs-3 mx-2"></i></a> 
-                    <a href="#"><i class="fa-brands fa-instagram fs-3 mx-2"></i></a> 
-                    <a href="#"><i class="fa-brands fa-linkedin-in fs-3 mx-2"></i></a> 
+                    <p>{{$parametres[0]['Contact_Number']}}</p>
                 </div>
             </div>
         </div>
         <div class="contact-info-form"> <span class="circle one"></span> <span class="circle two"></span>
-            <form action="#" onclick="return false;" autocomplete="off">
-                <h3 class="title">Contact us</h3>
+            <form action="{{ route('recevoirEmail') }}" method="POST">
+                @csrf
+                <h3 class="title">Votre Message</h3>
                 <div class="social-input-containers">
-                    <input type="text" name="name" class="input" placeholder="Name" /> 
+                    <input type="text" name="name" class="input text-light" placeholder="Name" required/> 
                 </div>
                 <div class="social-input-containers"> 
-                    <input type="email" name="email" class="input" placeholder="Email" />
+                    <input type="email" name="email" class="input" placeholder="Email" required/>
                 </div>
                 <div class="social-input-containers"> 
-                    <input type="tel" name="phone" class="input" placeholder="Phone" />  
+                    <input type="tel" name="phone" class="input" placeholder="Phone" required/>  
                 </div>
                 <div class="social-input-containers textarea"> 
-                    <textarea name="message" class="input" placeholder="Message"></textarea>
+                    <textarea name="message" class="input" placeholder="Message" required></textarea>
                 </div> 
-                <button class="btn btn-danger">Envoyer</button>
+                <button class="btn btn-danger" type="submit">Envoyer</button>
             </form>
         </div>
     </div>

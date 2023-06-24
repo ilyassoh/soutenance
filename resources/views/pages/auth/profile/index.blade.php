@@ -324,6 +324,44 @@
 			
 			<section class="content" id="section2" style="display:none;">
 				<script>
+					let myArray = [];
+					function ajouterGrad(){
+						var v = document.getElementById('v');
+						var tp = document.getElementById('tp');
+						var t = document.getElementById('t');
+						if (v.value!='' && tp.value!='' && t.value!=''){
+							v.style.border = '2px solid green';
+							tp.style.border = '2px solid green';
+							t.style.border = '2px solid green';
+							document.getElementById('containerGrads').innerHTML += v.value + ' - ' + tp.value + ' - ' + t.value + '<br>';
+							v.value = '';
+							tp.value = '';
+							t.value = '';
+							document.getElementById('listgrads').value = document.getElementById('containerGrads').innerHTML.replace(/<br>/g, ' / ')
+						}
+						else {
+							if (v.value == ''){
+								v.style.border = '2px solid red';
+							}
+							else {
+								v.style.border = '2px solid green';
+							}
+							if (tp.value == ''){
+								tp.style.border = '2px solid red';
+							}
+							else {
+								tp.style.border = '2px solid green';
+							}
+							if (t.value == ''){
+								t.style.border = '2px solid red';
+							}
+							else {
+								t.style.border = '2px solid green';
+							}
+						}
+					}
+				</script>
+				<script>
 					let tasks = [];
 					function addTask() {
 						const taskInput = document.getElementById("taskInput");
@@ -580,7 +618,7 @@
 							</div>
 						</div>
 						<div class="col-md-2"></div>
-						<div class="row justify-content-center text-center align-items-center mt-3" id="lastPart">
+						<div class="row justify-content-center align-items-center mt-3" id="lastPart">
 							<input type="text" name="idUser" id="idUser" value="{{$data->id}}" style="display:none;">
 							<input type="number" name="idDemande" id="idDemande" style="display:none;">
 							<input type="text" name="rdv" id="dc" style="display:none;">
@@ -598,8 +636,68 @@
 				</form>
 			</section>
 
-
+			
 			<main class="content" id="section3" style="display:none;">
+				<script>
+					function handleOptionChangeFilter(){
+						event.preventDefault(); 
+						var e = document.getElementById("filterHistorique");
+						var value = e.options[e.selectedIndex].value;
+						var text = e.options[e.selectedIndex].text;
+						trs = document.getElementById('dataTable').children[1].children ;
+						for (let i=0; i<trs.length ; i++){
+							trs[i].style.display = 'none';
+						}
+						if(text == 'Réalisable'){
+							for (let i=0; i<trs.length ; i++){
+								if (trs[i].children[3].innerText == 'Réalisable'){
+									trs[i].style.display = '';
+								}
+							}
+						}
+						else if(text == 'Confirmée'){
+							for (let i=0; i<trs.length ; i++){
+								if (trs[i].children[3].innerText == 'Confirmée'){
+									trs[i].style.display = '';
+								}
+							}
+						}
+						else if(text == 'Non Confirmée'){
+							for (let i=0; i<trs.length ; i++){
+								if (trs[i].children[3].innerText == 'Non Confirmée'){
+									trs[i].style.display = '';
+								}
+							}
+						}
+						else if(text == 'Réfusée'){
+							for (let i=0; i<trs.length ; i++){
+								if (trs[i].children[3].innerText == 'Réfusée'){
+									trs[i].style.display = '';
+								}
+							}
+						}
+						else if(text == 'Non Réalisable'){
+							for (let i=0; i<trs.length ; i++){
+								if (trs[i].children[3].innerText == 'Non Réalisable'){
+									trs[i].style.display = '';
+								}
+							}
+						}
+						else if(text == 'Réalisée'){
+							for (let i=0; i<trs.length ; i++){
+								if (trs[i].children[3].innerText == 'Réalisée'){
+									trs[i].style.display = '';
+								}
+							}
+						}
+						else {
+							for (let i=0; i<trs.length ; i++){
+								trs[i].style.display = '';
+							}
+						}
+					}
+				</script>
+				</script>
 				@if ($message = Session::get('success'))
 					<div class="alert alert-success alert-block">
 						<strong>{{ $message }}</strong>
@@ -611,7 +709,23 @@
 						<button onclick="showSection(2)" class="btn btn-primary mt-4">Effectuer une demande</button>
 					</div>
 				@else
-				<table class="table table-bordered">
+				<div class="row">
+					<div class="col-7">
+						<h4 class="m-2">Votre Historique</h4>
+					</div>
+					<div class="col-5">
+					<select class="form-select" aria-label="Default select example" id="filterHistorique" onchange="handleOptionChangeFilter()">
+						<option value="1">Tous</option>
+						<option value="2">Confirmée</option>
+						<option value="2">Non Confirmée</option>
+						<option value="3">Réfusée</option>
+						<option value="4">Réalisable</option>
+						<option value="5">Non Réalisable</option>
+						<option value="6">Réalisée</option>
+					</select>
+					</div>
+				</div>
+				<table class="table table-bordered" id="dataTable">
 					<thead>
 						<tr>
 							<th style="background:#222E3C;" class="text-light">ID</th>
@@ -623,13 +737,37 @@
 					</thead>
 					<tbody>
 					@foreach($demandes as $d)
+						@php 
+						switch ($d->statu) {
+							case 'NC':
+								$s = 'Non Confirmée';
+								break;
+							case 'C':
+								$s = 'Confirmée';
+								break;
+							case 'R':
+								$s = 'Réalisable';
+								break;
+							case 'NR':
+								$s = 'Non Réalisable';
+								break;
+							case 'D':
+								$s = 'Réfusée';
+								break;
+							case 'T':
+								$s = 'Réalisée';
+								break;
+							default :
+								$s = 'Pas de Statu';
+							}
+						@endphp
 						<tr>
 							<td style="background:#222E3C;" class="text-light">{{$d->id}}</td>
 							<td>
 								<a href="{{ asset('demandes_effectuees/'.$d->fword) }}" target="_blank">Téléchanrger document</a>
 						    </td>
 							<td>{{$d->date_choix}}</td>
-							<td>{{$d->statu}}</td>
+							<td id="td{{$s}}">{{$s}}</td>
 							@if ($d->rapport != '')
 							<td>
 								<a href="{{ asset('rapports/'.$d->rapport) }}" target="_blank">Téléchanrger Rapport</a>

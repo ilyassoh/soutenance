@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\publication;
 use App\Models\Machine;
+use App\Models\User;
+use App\Models\parametre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+Use App\Mail\recevoirMailer;
 
 class HomeController extends Controller
 {
@@ -25,5 +29,26 @@ class HomeController extends Controller
         $m = publication::where('id','=',$idMedia)->first();
         return view('pages.media.media-details', compact('m'));
     }
+
+
+    public function apropos(){
+        $machines = Machine::all();
+        $users = User::whereIn('role_id', [1, 4, 5])->get();
+        return view('pages.apropos.apropos', compact('users','machines'));
+    }
+
+
+    public function contact(){
+        $parametres = parametre::all();
+        return view('pages.contact.contact', compact('parametres'));
+    }
+
+    public function recevoirEmail(Request $request){
+        $parametres = parametre::all();
+        Mail::to($parametres[0]['Contact_email'])->send(new recevoirMailer($request->email,$request->phone,$request->name,$request->message));
+        return back()->with('success','Message envoyé avec succès');
+    }
+
+
 }
 

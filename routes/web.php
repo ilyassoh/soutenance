@@ -55,11 +55,12 @@ Route::get('/media',[mediaController::class,'index'])->name('media');
 
 //Demande 
 
-Route::post('/accepter-demande',[demandeController::class,'accepterDemande'])->name('accepter-demande');
+Route::get('/accepter-demande/{id}',[demandeController::class,'accepterDemande'])->name('accepter-demande');
 
-Route::post('/refuser-demande',[demandeController::class,'refuserDemande'])->name('refuser-demande');
+Route::get('/refuser-demande/{id}',[demandeController::class,'refuserDemande'])->name('refuser-demande');
 
-Route::post('/Realise-demande',[demandeController::class,'RealiseDemande'])->name('Realise-demande');
+Route::get('/Realise-demande/{id}',[demandeController::class,'RealiseDemande'])->name('Realise-demande');
+Route::get('/Traite-demande/{id}',[demandeController::class,'TraiteDemande'])->name('Traite-demande');
 
 Route::post('/Non_Realise-demande',[demandeController::class,'Non_RealiseDemande'])->name('Non_Realise-demande');
 
@@ -70,28 +71,12 @@ Route::get('/machine-details/{idMachine}',[HomeController::class,'machineDetails
 Route::get('/media-details/{idMedia}',[HomeController::class,'mediaDetails'])->name('media-details');
 
 
-
-// Route de page a propos
-Route::get('/apropos', function (){
-    return view('pages.apropos.apropos');
-})->name('apropos');
-
-// Route de page a propos
-Route::get('/contact', function (){
-    return view('pages.contact.contact');
-})->name('contact');
+Route::get('/apropos',[HomeController::class,'apropos'])->name('apropos');
+Route::get('/contact',[HomeController::class,'contact'])->name('contact');
+Route::post('/recevoirEmail',[HomeController::class,'recevoirEmail'])->name('recevoirEmail');
 
 
 
-// Route de connection 
-// Route::get('/connexion', function (){
-//     return view('pages.auth.connexion');
-// })->name('connexion');
-
-// Route de page media 
-// Route::get('/inscription', function (){
-//     return view('pages.auth.inscription');
-// })->name('inscription');
 
 
 

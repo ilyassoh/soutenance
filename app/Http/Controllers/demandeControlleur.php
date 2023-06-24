@@ -847,12 +847,388 @@ class demandeControlleur extends Controller
                $templateProcessor->saveAs($modifiedPath);
                // Mail::to('recipient@example.com')->send(new ModifiedDocumentEmail($demande->id.'_'.$td->fichier_word));
                break ;
+            case '35':
+                // Generer le fichier Word 
+                $td = type_demande::where('id','=',$request->idDemande)->first();
+                $chercheur = Chercheur::where('id','=',$request->idUser)->first();
+                if ($request->ref != ""){
+                    $templateProcessor->setValue('ref', $request->ref);
+                }
+                else {
+                    $templateProcessor->setValue('ref', '');
+                }
+                if ($request->solvant != ""){
+                    $templateProcessor->setValue('solvant', $request->solvant);
+                }
+                else {
+                    $templateProcessor->setValue('solvant', '');
+                }
+                if ($request->masse != ""){
+                    $templateProcessor->setValue('masse', $request->masse);
+                }
+                else {
+                    $templateProcessor->setValue('masse', '');
+                }
+                if ($request->h1 != ""){
+                    $templateProcessor->setValue('h1', $request->h1);
+                }
+                else {
+                    $templateProcessor->setValue('h1', '');
+                }
+                if ($request->c13 != ""){
+                    $templateProcessor->setValue('c13', $request->c13);
+                }
+                else {
+                    $templateProcessor->setValue('c13', '');
+                }
+                if ($request->dept != ""){
+                    $templateProcessor->setValue('dept', $request->dept);
+                }
+                else {
+                    $templateProcessor->setValue('dept', '');
+                }
+                if ($request->autre != ""){
+                    $templateProcessor->setValue('autre', $request->autre);
+                }
+                else {
+                    $templateProcessor->setValue('autre', '');
+                }
+               // Stocker Demande
+               $str = Structures::where('id','=',$chercheur->structures_id)->first();
+               $dir = User::where('id','=',$str->users_id)->first();
+               $demande = new Demandes();
+               $demande->chercheurs_id = $request->idUser ;
+               $demande->type_demandes_id = $request->idDemande ;
+               $demande->statu = 'NC' ;
+               $demande->date_choix = $request->rdv ;
+               $demande->rapport = '' ;
+               $demande->directeurs_id = $dir->id ;
+               $demande->secretaires_id = 1 ;
+               $demande->fword = '';
+               $demande->save();
+               $demande->fword = $demande->id.'_'.$td->fichier_word ;
+               $demande->save();
+               $reservation = new Reservations();
+               $machine = Machine::where('id','=',$td->machines_id)->first();
+               $reservation->rdv = $request->rdv ;
+               $reservation->machines_id = $machine->id ;
+               $reservation->save();
+               // Envoyer email 
+               $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
+               $templateProcessor->saveAs($modifiedPath);
+               break ;
+
+
+            case '8':
+                // Generer le fichier Word 
+                $listreferences = explode(" | ", $request->listreferences); 
+                $listgrads = explode(" / ", $request->listgrads); 
+                $td = type_demande::where('id','=',$request->idDemande)->first();
+                $chercheur = Chercheur::where('id','=',$request->idUser)->first();
+                if ($request->nbrEchantillons != ""){
+                    $templateProcessor->setValue('nbrEchantillons', $request->nbrEchantillons);
+                }
+                else {
+                    $templateProcessor->setValue('nbrEchantillons', '');
+                }
+                if ($request->nbrRepetitions != ""){
+                    $templateProcessor->setValue('nbrRepetitions', $request->nbrRepetitions);
+                }
+                else {
+                    $templateProcessor->setValue('nbrRepetitions', '');
+                }
+                if ($request->typeAnalyse != ""){
+                    $templateProcessor->setValue('typeAnalyse', $request->typeAnalyse);
+                }
+                else {
+                    $templateProcessor->setValue('typeAnalyse', '');
+                }
+                if ($request->nbrStandards != ""){
+                    $templateProcessor->setValue('nbrStandards', $request->nbrStandards);
+                }
+                else {
+                    $templateProcessor->setValue('nbrStandards', '');
+                }
+                if ($request->tmpInjecteur != ""){
+                    $templateProcessor->setValue('tmpInjecteur', $request->tmpInjecteur);
+                }
+                else {
+                    $templateProcessor->setValue('tmpInjecteur', '');
+                }
+                if ($request->tmpDetecteur != ""){
+                    $templateProcessor->setValue('tmpDetecteur', $request->tmpDetecteur);
+                }
+                else {
+                    $templateProcessor->setValue('tmpDetecteur', '');
+                }
+                if ($request->natureEchantillons != ""){
+                    $templateProcessor->setValue('natureEchantillons', $request->natureEchantillons);
+                }
+                else {
+                    $templateProcessor->setValue('natureEchantillons', '');
+                }
+                if ($request->mols != ""){
+                    $templateProcessor->setValue('mols', $request->mols);
+                }
+                else {
+                    $templateProcessor->setValue('mols', '');
+                }
+                if ($request->debitGazNiveau != ""){
+                    $templateProcessor->setValue('debitGazNiveau', $request->debitGazNiveau);
+                }
+                else {
+                    $templateProcessor->setValue('debitGazNiveau', '');
+                }
+                if ($request->pure != ""){
+                    $templateProcessor->setValue('pure', $request->pure);
+                }
+                else {
+                    $templateProcessor->setValue('pure', '');
+                }
+                if ($request->dilue != ""){
+                    $templateProcessor->setValue('dilue', $request->dilue);
+                }
+                else {
+                    $templateProcessor->setValue('dilue', '');
+                }
+                if ($request->solvant != ""){
+                    $templateProcessor->setValue('solvant', $request->solvant);
+                }
+                else {
+                    $templateProcessor->setValue('solvant', '');
+                }
+                if ($request->toxicite != ""){
+                    $templateProcessor->setValue('toxicite', $request->toxicite);
+                }
+                else {
+                    $templateProcessor->setValue('toxicite', '');
+                }
+                if ($request->cdstockage != ""){
+                    $templateProcessor->setValue('cdstockage', $request->cdstockage);
+                }
+                else {
+                    $templateProcessor->setValue('cdstockage', '');
+                }
+                if ($request->rrEchant != ""){
+                    $templateProcessor->setValue('rrEchant', $request->rrEchant);
+                }
+                else {
+                    $templateProcessor->setValue('rrEchant', '');
+                }
+                for ($i = 1; $i <= 10; $i++) {
+                    if (isset($listreferences[$i-1])) {
+                        $templateProcessor->setValue('ref'.$i , $listreferences[$i-1]);
+                    } else {
+                        $templateProcessor->setValue('ref'.$i , "");
+                    }
+                }
+                for ($i = 1; $i <= 9; $i++) {
+                    if (isset($listgrads[$i-1])) {
+                        $items = explode(" - ", $listgrads[$i-1]); 
+                        $templateProcessor->setValue('v'.$i , $items[0]);
+                        $templateProcessor->setValue('tp'.$i , $items[1]);
+                        $templateProcessor->setValue('t'.$i , $items[2]);
+                    } 
+                    else {
+                        $templateProcessor->setValue('v'.$i , '');
+                        $templateProcessor->setValue('tp'.$i , '');
+                        $templateProcessor->setValue('t'.$i , '');
+                    }
+                }
+               // Stocker Demande
+               $str = Structures::where('id','=',$chercheur->structures_id)->first();
+               $dir = User::where('id','=',$str->users_id)->first();
+               $demande = new Demandes();
+               $demande->chercheurs_id = $request->idUser ;
+               $demande->type_demandes_id = $request->idDemande ;
+               $demande->statu = 'NC' ;
+               $demande->date_choix = $request->rdv ;
+               $demande->rapport = '' ;
+               $demande->directeurs_id = $dir->id ;
+               $demande->secretaires_id = 1 ;
+               $demande->fword = '';
+               $demande->save();
+               $demande->fword = $demande->id.'_'.$td->fichier_word ;
+               $demande->save();
+               $reservation = new Reservations();
+               $machine = Machine::where('id','=',$td->machines_id)->first();
+               $reservation->rdv = $request->rdv ;
+               $reservation->machines_id = $machine->id ;
+               $reservation->save();
+               // Envoyer email 
+               $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
+               $templateProcessor->saveAs($modifiedPath);
+               break ;
+
+
+            case '14':
+                // Generer le fichier Word 
+                $listreferences = explode(" | ", $request->listreferences); 
+                $td = type_demande::where('id','=',$request->idDemande)->first();
+                $chercheur = Chercheur::where('id','=',$request->idUser)->first();
+                if ($request->nombreEchantillons != ""){
+                    $templateProcessor->setValue('nombreEchantillons', $request->nombreEchantillons);
+                }
+                else {
+                    $templateProcessor->setValue('nombreEchantillons', '');
+                }
+                if ($request->solide != ""){
+                    $templateProcessor->setValue('solide', $request->solide);
+                }
+                else {
+                    $templateProcessor->setValue('solide', '');
+                }
+                if ($request->poudre != ""){
+                    $templateProcessor->setValue('poudre', $request->poudre);
+                }
+                else {
+                    $templateProcessor->setValue('poudre', '');
+                }
+                if ($request->polymere != ""){
+                    $templateProcessor->setValue('polymere', $request->polymere);
+                }
+                else {
+                    $templateProcessor->setValue('polymere', '');
+                }
+                if ($request->sectionPolie != ""){
+                    $templateProcessor->setValue('sectionPolie', $request->sectionPolie);
+                }
+                else {
+                    $templateProcessor->setValue('sectionPolie', '');
+                }
+                if ($request->coucheMince != ""){
+                    $templateProcessor->setValue('coucheMince', $request->coucheMince);
+                }
+                else {
+                    $templateProcessor->setValue('coucheMince', '');
+                }
+                if ($request->lameMince != ""){
+                    $templateProcessor->setValue('lameMince', $request->lameMince);
+                }
+                else {
+                    $templateProcessor->setValue('lameMince', '');
+                }
+                if ($request->lameMinautreNatureEchantillonsce != ""){
+                    $templateProcessor->setValue('autreNatureEchantillons', $request->autreNatureEchantillons);
+                }
+                else {
+                    $templateProcessor->setValue('autreNatureEchantillons', '');
+                }
+                if ($request->toxicite != ""){
+                    $templateProcessor->setValue('toxicite', $request->toxicite);
+                }
+                else {
+                    $templateProcessor->setValue('toxicite', '');
+                }
+                if ($request->braggBrentano != ""){
+                    $templateProcessor->setValue('braggBrentano', $request->braggBrentano);
+                }
+                else {
+                    $templateProcessor->setValue('braggBrentano', '');
+                }
+                if ($request->reflectiviteX != ""){
+                    $templateProcessor->setValue('reflectiviteX', $request->reflectiviteX);
+                }
+                else {
+                    $templateProcessor->setValue('reflectiviteX', '');
+                }
+                if ($request->saxs != ""){
+                    $templateProcessor->setValue('saxs', $request->saxs);
+                }
+                else {
+                    $templateProcessor->setValue('saxs', '');
+                }
+                if ($request->thetaMin != ""){
+                    $templateProcessor->setValue('thetaMin', $request->thetaMin);
+                }
+                else {
+                    $templateProcessor->setValue('thetaMin', '');
+                }
+                if ($request->thetaMax != ""){
+                    $templateProcessor->setValue('thetaMax', $request->thetaMax);
+                }
+                else {
+                    $templateProcessor->setValue('thetaMax', '');
+                }
+                if ($request->vitesseBalayage != ""){
+                    $templateProcessor->setValue('vitesseBalayage', $request->vitesseBalayage);
+                }
+                else {
+                    $templateProcessor->setValue('vitesseBalayage', '');
+                }
+                if ($request->vitesseRotation != ""){
+                    $templateProcessor->setValue('vitesseRotation', $request->vitesseRotation);
+                }
+                else {
+                    $templateProcessor->setValue('vitesseRotation', '');
+                }
+                if ($request->indexation != ""){
+                    $templateProcessor->setValue('indexation', $request->indexation);
+                }
+                else {
+                    $templateProcessor->setValue('indexation', '');
+                }
+                if ($request->identificationPhase != ""){
+                    $templateProcessor->setValue('identificationPhase', $request->identificationPhase);
+                }
+                else {
+                    $templateProcessor->setValue('identificationPhase', '');
+                }
+                if ($request->affinementRietveld != ""){
+                    $templateProcessor->setValue('affinementRietveld', $request->affinementRietveld);
+                }
+                else {
+                    $templateProcessor->setValue('affinementRietveld', '');
+                }
+                if ($request->cdstockage != ""){
+                    $templateProcessor->setValue('cdstockage', $request->cdstockage);
+                }
+                else {
+                    $templateProcessor->setValue('cdstockage', '');
+                }
+                if ($request->rrEchant != ""){
+                    $templateProcessor->setValue('rrEchant', $request->rrEchant);
+                }
+                else {
+                    $templateProcessor->setValue('rrEchant', '');
+                }
+                for ($i = 1; $i <= 10; $i++) {
+                    if (isset($listreferences[$i-1])) {
+                        $templateProcessor->setValue('ref'.$i , $listreferences[$i-1]);
+                    } else {
+                        $templateProcessor->setValue('ref'.$i , "");
+                    }
+                }
+               // Stocker Demande
+               $str = Structures::where('id','=',$chercheur->structures_id)->first();
+               $dir = User::where('id','=',$str->users_id)->first();
+               $demande = new Demandes();
+               $demande->chercheurs_id = $request->idUser ;
+               $demande->type_demandes_id = $request->idDemande ;
+               $demande->statu = 'NC' ;
+               $demande->date_choix = $request->rdv ;
+               $demande->rapport = '' ;
+               $demande->directeurs_id = $dir->id ;
+               $demande->secretaires_id = 1 ;
+               $demande->fword = '';
+               $demande->save();
+               $demande->fword = $demande->id.'_'.$td->fichier_word ;
+               $demande->save();
+               $reservation = new Reservations();
+               $machine = Machine::where('id','=',$td->machines_id)->first();
+               $reservation->rdv = $request->rdv ;
+               $reservation->machines_id = $machine->id ;
+               $reservation->save();
+               // Envoyer email 
+               $modifiedPath = public_path('./demandes_effectuees/'.$demande->id.'_'.$td->fichier_word);
+               $templateProcessor->saveAs($modifiedPath);
+               break ;
             
             default : 
                 return back();
                 break;
         }
-        return redirect('profile')->with('success', 'Operation completed successfully.');
+        return redirect('profile')->with('success', 'La demande est effectuée avec succès.');
     }
 
 

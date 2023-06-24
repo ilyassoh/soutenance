@@ -45,9 +45,7 @@ $string = str_replace(']', '', $string);
     @if ($data[$i]->type=='radio1')
       <img src="{{ asset('storage/' . $data[$i]->photo) }}"class="d-block w-100" alt="Wild Landscape" height="500"/>
       <div class="carousel-caption d-none d-md-block">
-
-        <h5>{{$data[$i]->titre}}</h5>
-        <p>{{$data[$i]->description}}</p>
+        <h5 class="text-dark">{{$data[$i]->titre}}</h5>
       </div>
       @break
    @endif
@@ -59,83 +57,61 @@ $string = str_replace(']', '', $string);
 <!-- second part -->
 
 <br>
-
- <!-- hadi fiha ga3 les annonces mohime -->
-
-  <!--Main layout-->
-  
   <main class="mt-5">
     <div class="container">
-      <!--Section: Content-->
       <section>
       @foreach ($data as $actualite)
       @if ($actualite->type =='radio1')
         <div class="row">
           <div class="col-md-6 gx-5 mb-4">
             <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
-             <!-- <img src="{{URL('imgs/backLab1.jpg')}}" class="img-fluid" /> -->
-              <img src="{{ asset('storage/' . $actualite->photo) }}" alt="Publication Image"  width='500' height="200">
+              <img src="{{ asset('storage/' . $actualite->photo) }}" alt="Publication Image"  width='500' height="250">
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </a>
             </div>
           </div>
-
           <div class="col-md-6 gx-5 mb-4">
             <h4><strong>{{$actualite->titre}} </strong></h4>
             <p class="text-muted">
-              {{$actualite->description}}
+                @php $d = Str::limit($actualite->description, 200) ; @endphp
+                {{$d}} <br>
+                <a href="{{ route('media-details', ['idMedia' => $actualite->id]) }}" class="btn btn-primary mt-4">Voir plus</a>
             </p>
           </div>
         </div>
         @endif
         @endforeach
       </section>
-
-  
-
-
-   <!-- hado fihum les  buttons  --> 
-
-      <!--Section: Content-->
-
-     <!-- <hr class="my-5" /> -->
-
-      <!--Section: Content-->
      
       
       <section class="text-center">
-        <h4 class="mb-5"><strong>Facilis consequatur eligendi</strong></h4>
-
+        <h4 class="mb-5"><strong>Les Actualités</strong></h4>
         <div class="row">
-          @foreach ($data as $actualite)
+        @foreach ($data as $actualite)
           @if ($actualite->type =='radio1')
-          <div class="col-lg-4 col-md-12 mb-4">
+          <a href="{{ route('media-details', ['idMedia' => $actualite->id]) }}" class="col-lg-4 col-md-12 mb-4 text-decoration-none">
+          <div >
             <div class="card">
               <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                <div height="100" width="300">
-                  <img src="{{ asset('storage/' . $actualite->photo) }}" class="img-fluid"  />
+                <div>
+                  <img src="{{ asset('storage/' . $actualite->photo) }}" width="100%" height="200"/>
                 </div>
-                
-                <a href="#!">
-                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                </a>
               </div>
               <div class="card-body">
-                <h5 class="card-title">{{$actualite->titre}}</h5>
-                <p class="card-text">
-                {{$actualite->description}}
+                @php $d = Str::limit($actualite->titre, 100) ; @endphp
+                <h5 class="card-title">{{$d}}</h5>
+                <p class="card-text text-dark">
+                @php $d = Str::limit($actualite->description, 200) ; @endphp
+                {{$d}}
                 </p>
               </div>
             </div>
           </div>
+          </a>
           @endif
-      @endforeach
+        @endforeach
       <hr class="my-5" />
-
-      <!--Section: Content-->
-     
-      <!--Section: Content-->
     </div>
   </main>
     @include('partitions.footer')

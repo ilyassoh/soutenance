@@ -1,15 +1,14 @@
-<div class="container mb-3 text-center">
-  <h2 class="my-3">Our  Partners/ Our Clients</h2>
+<div class="container mb-3 mt-5 text-center">
+  <h2 class="my-3">Nos Partenaires</h2>
    <section class="customer-logos slider">
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
-      <div class="slide"><img src="{{URL('imgs/cac_logo.png')}}"></div>
+      <div class="slide"><img src="{{URL('imgs/sponsors/s1.png')}}" width="200" height="100"></div>
+      <div class="slide"><img src="{{URL('imgs/sponsors/s2.png')}}" width="200" height="100"></div>
+      <div class="slide"><img src="{{URL('imgs/sponsors/s3.png')}}" width="200" height="100"></div>
+      <div class="slide"><img src="{{URL('imgs/sponsors/s4.png')}}" width="200" height="100"></div>
+      <div class="slide"><img src="{{URL('imgs/sponsors/s1.png')}}" width="200" height="100"></div>
+      <div class="slide"><img src="{{URL('imgs/sponsors/s2.png')}}" width="200" height="100"></div>
+      <div class="slide"><img src="{{URL('imgs/sponsors/s3.png')}}" width="200" height="100"></div>
+      <div class="slide"><img src="{{URL('imgs/sponsors/s4.png')}}" width="200" height="100"></div>
    </section>
 </div>
 <style>

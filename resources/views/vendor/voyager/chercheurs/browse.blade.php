@@ -42,10 +42,6 @@
 
 
 @if ( auth()->user()->role->display_name == 'Directeur')
-
-<li class="nav-item">-
-    <h1>this is directeur page </h1>
-</li>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -67,17 +63,21 @@
             <td>{{$chercheur->telephone}}</td>
             <td><img class="w-40 rounded-circle" width="60" src="{{asset('images/chercheurs/'.$chercheur->image)}}" alt=""></td>
 
-@php
-if($chercheur->is_verified == '0')
-$s = "Non";
-if($chercheur->is_verified == '1')
-$s = "OUI";
-@endphp
-    <td>{{$s}}</td>
-
-    <td>
-    <buttono onclick="document.getElementById('idDTU').value = <?php echo $chercheur->id ; ?> ;
-    document.getElementById('updateForm').submit()" class="btn btn-primary">Verifier</button></td>
+            @php
+                if($chercheur->is_verified == '0')
+                    $s = "Non";
+                if($chercheur->is_verified == '1')
+                    $s = "Oui";
+                @endphp
+            <td>{{$s}}</td>
+            <td>
+                <buttono onclick="document.getElementById('idDTU').value = <?php echo $chercheur->id ; ?> ;
+                document.getElementById('updateForm').submit()" class="btn btn-success">Valider</button>
+            </td>
+            <td>
+                <buttono onclick="document.getElementById('idDTU').value = <?php echo $chercheur->id ; ?> ;
+                document.getElementById('updateForm').submit()" class="btn btn-danger">Annuler</button>
+            </td>
         </tr>
     @endforeach
     </tbody>
@@ -90,9 +90,7 @@ $s = "OUI";
 
 
 @else
-<li class="nav-item">
-    <h1>this is Admin page </h1>
-</li>
+<h1>this is Admin page </h1>
 @section('content')
 <div class="page-content browse container-fluid">
     @include('voyager::alerts')

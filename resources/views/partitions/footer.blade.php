@@ -1,4 +1,5 @@
 <!-- Footer -->
+@foreach ($parametres as $p)
 <footer class="text-center text-lg-start bg-white text-muted">
   <!-- Section: Social media -->
   <section class="d-flex justify-content-center justify-content-center p-4 border-bottom">
@@ -22,17 +23,16 @@
         <div class="col-md-4 mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3 text-secondary"></i>name
+            <i class="fas fa-gem me-3 text-secondary"></i>CAC
           </h6>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+          {{ $p->description }}
           </p>
         </div>
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-3 mb-4">
+        <div class="col-md-4 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
             Nos Pages
@@ -56,37 +56,16 @@
           </p>
         </div>
         <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-2 mx-auto mb-4">
-          <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">
-            DES LIENS UTILES
-          </h6>
-          <p>
-            <a href="{{ route('contact') }}" class="text-reset">CONTACT NOUS </a>
-          </p>
-          <p>
-            <a href="{{ route('connexion') }}" class="text-reset">CONNEXION</a>
-          </p>
-          <p>
-            <a href="{{ route('inscription') }}" class="text-reset">INSCRIPTION</a>
-          </p>
-         
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-3 mb-md-0 mb-4">
+        <div class="col-md-4 mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
+          <p><i class="fas fa-home me-3 text-secondary"></i> {{ $p->location }}</p>
           <p>
             <i class="fas fa-envelope me-3 text-secondary"></i>
-            info@example.com
+            {{ $p->Contact_email }}
           </p>
-          <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
-          <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+          <p><i class="fas fa-phone me-3 text-secondary"></i>{{ $p->Contact_Number }}</p>
+          <p><i class="fas fa-print me-3 text-secondary"></i>{{ $p->Contact_fixe }}</p>
         </div>
         <!-- Grid column -->
       </div>
@@ -101,6 +80,7 @@
   </div>
   <!-- Copyright -->
 </footer>
+@endforeach
 <!-- Footer -->
 
 <style>

@@ -94,5 +94,6 @@
     </select>
 </div>
 <p>Si oui, la récupération du reste des échantillons (s'il en reste) doit se faire au maximum 15 jours après la réception des résultats d'analyse. Dépassant ce délai, ils seront détruits. Si aucune case
-
-
+<div class="row justify-content-center">
+    <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
+</div>

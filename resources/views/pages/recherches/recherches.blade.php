@@ -28,7 +28,6 @@
 
 <body>
 	@include('partitions.header')
-
 	<script>
 		document.getElementById('recherches').setAttribute('id', 'activeLink')
 	</script>
@@ -37,41 +36,45 @@
 
 	<section class="light">
 		<div class="container py-2">
-			<div class="h1 text-center text-dark" id="pageHeaderTitle">Les Recheches</div>
-			@foreach ($data as $recherche)
-			<article class="postcard light red">
-				<a class="postcard__img_link" href="#">
-					<img class="postcard__img" src="{{ asset('storage/' . $recherche->photo) }}" alt="Image Title" />
-				</a>
-				<div class="postcard__text t-dark">
-					<h1 class="postcard__title red"><a href="#">{{$recherche->titre}}</a></h1>
-					<div class="postcard__subtitle small">
-						<time datetime="2020-05-25 12:00:00">
-							<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-						</time>
-					</div>
-					<div class="postcard__bar"></div>
-					<div class="postcard__preview-txt">{{$recherche->description}}</div>
-					<ul class="postcard__tagbox">
-						<div class="">
-							<div class="media">
-								<img class="mr-3 rounded-circle" src="{{ asset('storage/' . $recherche->photo) }}" alt="Generic placeholder image" style="max-width:50px">
-								<div class="media-body">
-									<h6 class="my-0 text-black d-block">Nom de checheur</h6>
-									<small>Director of UI/UX</small>
+			<div class="h1 text-center text-dark" id="pageHeaderTitle">Les Recherches</div>
+			@foreach ($recherches as $recherche)
+				@php 
+					foreach($chercheurs as $cher){
+						if ($cher->id == $recherche->chercheur_id){
+							$u = $cher ;
+						}
+					}
+				@endphp
+				<article class="postcard light red">
+					<a class="postcard__img_link" href="#">
+						<img class="postcard__img" src="{{ asset('storage/' . $recherche->image) }}" alt="Image Title" />
+					</a>
+					<div class="postcard__text t-dark">
+						<h1 class="postcard__title red"><a href="#">{{$recherche->titre}}</a></h1>
+						<div class="postcard__subtitle small">
+							<time datetime="2020-05-25 12:00:00">
+								<i class="fas fa-calendar-alt mr-2"></i>{{$recherche->created_at}}
+							</time>
+						</div>
+						<div class="postcard__bar"></div>
+						<div class="postcard__preview-txt">{{$recherche->description}}</div>
+						<ul class="postcard__tagbox">
+							<div class="">
+								<div class="media">
+									<img class="mr-3 rounded-circle" src="{{ asset('images/chercheurs/' . $u->image) }}" alt="Generic placeholder image" style="max-width:50px">
+									<div class="media-body">
+										<h6 class="my-0 text-black d-block">{{ $u->nom }}</h6>
+										<small>{{ $u->biographie }}</small>
+									</div>
 								</div>
 							</div>
-						</div>
-					</ul>
-				</div>
-			</article>
-      @endforeach
-
-
-
-</div>
-</div>
-</section>
+						</ul>
+					</div>
+				</article>
+			@endforeach
+			</div>
+		</div>
+	</section>
 
 	<div id="preloader"></div>
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
