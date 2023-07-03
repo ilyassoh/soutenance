@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{URL('css/home.css')}}">
     <link rel="stylesheet" href="{{URL('css/header.css')}}">
     <title>CAC</title>
+    <link rel="icon" type="image/x-icon" href="{{URL('imgs\cac_logo_bg.png')}}">
 </head>
 <body>
     @include('partitions.header')

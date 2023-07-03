@@ -39,78 +39,86 @@
 
 
 
- <!-- ********************************************** Directeur ************************************************ -->
-<?php  $cher = array() ; ?>
+<!-- ********************************************** Directeur ************************************************ -->
+<?php $cher = array(); ?>
 @if ( auth()->user()->role->display_name == 'Directeur')
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">date_choix</th>
-            <th scope="col">chercheur</th>
-            <th scope="col">fword</th>
-            <th scope="col">statu</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($demandes as $demande)
-            @foreach ($chercheurs as $chercheur) 
-                @if($chercheur->id==$demande->chercheurs_id)
-                   @php  $cher = $chercheur ; @endphp
-                @endif
-            @endforeach
-            @foreach ($structures as $str) 
-                @if($str->id==$cher->structures_id)
-                    @php $structr = $str ; @endphp
-                @endif
-            @endforeach
-        @if (auth()->user()->id == $structr->users_id)
-        <span id="susID" style="display:none;"></span>
-        <tr>
-            <th scope="row">{{$demande->id}}</th>
-            <td>{{$demande->date_choix}}</td>
-            <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
-            <td><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
-            @php
-                if($demande->statu == 'NC')
-                $s = "Non Confirmé";
-                if($demande->statu == 'C')
-                $s = "Confirmé";
-                if($demande->statu == 'R')
-                $s = "Réalisé";
-                if($demande->statu == 'D')
-                $s = "Rejeté";
-            @endphp
-            <td>{{$s}}</td>
-            <td>
-                <button class="btn btn-success" onclick="
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-bordered">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">date_choix</th>
+                            <th scope="col">chercheur</th>
+                            <th scope="col">fword</th>
+                            <th scope="col">statu</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($demandes as $demande)
+                        @foreach ($chercheurs as $chercheur)
+                        @if($chercheur->id==$demande->chercheurs_id)
+                        @php $cher = $chercheur ; @endphp
+                        @endif
+                        @endforeach
+                        @foreach ($structures as $str)
+                        @if($str->id==$cher->structures_id)
+                        @php $structr = $str ; @endphp
+                        @endif
+                        @endforeach
+                        @if (auth()->user()->id == $structr->users_id)
+                        <span id="susID" style="display:none;"></span>
+                        <tr>
+                            <th scope="row">{{$demande->id}}</th>
+                            <td>{{$demande->date_choix}}</td>
+                            <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
+                            <td><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
+                            @php
+                            if($demande->statu == 'NC')
+                            $s = "Non Confirmé";
+                            if($demande->statu == 'C')
+                            $s = "Confirmé";
+                            if($demande->statu == 'R')
+                            $s = "Réalisé";
+                            if($demande->statu == 'D')
+                            $s = "Rejeté";
+                            @endphp
+                            <td>{{$s}}</td>
+                            <td>
+                                <button class="btn btn-success" onclick="
                     var modal = document.getElementById('modal');
                     document.getElementById('susID').innerText = 'A'+{{ $demande->id }};
                     modal.style.display = 'block';
                 ">Accepter</button>
-                <a href="{{route('accepter-demande', ['id' => $demande->id]) }}" style="display:none;" id="rightAccepte{{$demande->id}}" >Accepte</a>
-            </td>
-            <td>
-                <button class="btn btn-danger" onclick="
+                                <a href="{{route('accepter-demande', ['id' => $demande->id]) }}" style="display:none;" id="rightAccepte{{$demande->id}}">Accepte</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" onclick="
                     var modal = document.getElementById('modal');
                     document.getElementById('susID').innerText = 'R'+{{ $demande->id }};
                     modal.style.display = 'block';
                 ">Réfuser</button>
-                <a href="{{ route('refuser-demande', ['id' => $demande->id]) }}" style="display:none;" id="rightRefuse{{$demande->id}}">Refuser</a>
-            </td>
-        </tr>
-        @endif
-        @endforeach
-    </tbody>
-</table>
+                                <a href="{{ route('refuser-demande', ['id' => $demande->id]) }}" style="display:none;" id="rightRefuse{{$demande->id}}">Refuser</a>
+                            </td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 class="text-center mb-5 pb-5">Confirmation d'action</h2>
-    <div class="row pt-5">
-        <div class="col-md-5"></div>
-        <button class="col-md-3 btn btn-success" onclick="
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 class="text-center mb-5 pb-5">Confirmation d'action</h2>
+        <div class="row pt-5">
+            <div class="col-md-5"></div>
+            <button class="col-md-3 btn btn-success" onclick="
             susID = document.getElementById('susID').innerText ;
             var part1 = susID.charAt(0); 
             var part2 = susID.substring(1);
@@ -121,40 +129,43 @@
                 document.getElementById('rightRefuse'+part2).click();
             }
         ">Oui</button>
-        <div class="col-md-1"></div>
-        <button id="close2"class="col-md-2 btn btn-danger">Non</button>
+            <div class="col-md-1"></div>
+            <button id="close2" class="col-md-2 btn btn-danger">Non</button>
+        </div>
     </div>
-  </div>
 </div>
 <style>
     .modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
     }
+
     .modal-content {
-    background-color: #fff;
-    margin: 20% auto;
-    padding: 20px;
-    width: 60%;
+        background-color: #fff;
+        margin: 20% auto;
+        padding: 20px;
+        width: 60%;
     }
+
     .close {
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+        color: black;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
     }
+
     .close:hover,
     .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
     }
 </style>
 <script>
@@ -179,106 +190,114 @@
 <!-- ********************************************** Technicien ******************************************* -->
 @elseif( auth()->user()->role->display_name == 'Technicien')
 <span id="susID" style="display:none;"></span>
-<table class="table table-striped mt-5">
-    <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">date_choix</th>
-            <th scope="col">chercheur</th>
-            <th scope="col">fword</th>
-            <th scope="col">statu</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($demandes as $demande)
-            @foreach ($tds as $td) 
-                @if($td->id==$demande->type_demandes_id)
-                   @php  $t = $td ; @endphp
-                @endif
-            @endforeach
-            @foreach ($machines as $m) 
-                @if($m->id==$t->machines_id)
-                    @php $mch = $m ; @endphp
-                @endif
-            @endforeach
-        @if (auth()->user()->id == $mch->users_id)
-        @if(!($demande->statu == 'D' || $demande->statu == 'NC') )
-        <tr>
-            <th scope="row">{{$demande->id}}</th>
-            <td>{{$demande->date_choix}}</td>
-            <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
-            <td><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
-            @php
-                if($demande->statu == 'C')
-                    $s = "Confirmée";
-                if($demande->statu == 'R')
-                    $s = "Realisable";
-                if($demande->statu == 'NR')
-                    $s = "Irréalisable";
-                if($demande->statu == 'T')
-                    $s = "Traitée";
-            @endphp
-            <td>{{$s}}</td>
-            <td>
-                <button class="btn btn-success" onclick="
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-bordered">
+            <div class="panel-body">
+                <table class="table table-striped mt-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">date_choix</th>
+                            <th scope="col">chercheur</th>
+                            <th scope="col">fword</th>
+                            <th scope="col">statu</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($demandes as $demande)
+                        @foreach ($tds as $td)
+                        @if($td->id==$demande->type_demandes_id)
+                        @php $t = $td ; @endphp
+                        @endif
+                        @endforeach
+                        @foreach ($machines as $m)
+                        @if($m->id==$t->machines_id)
+                        @php $mch = $m ; @endphp
+                        @endif
+                        @endforeach
+                        @if (auth()->user()->id == $mch->users_id)
+                        @if(!($demande->statu == 'D' || $demande->statu == 'NC') )
+                        <tr>
+                            <th scope="row">{{$demande->id}}</th>
+                            <td>{{$demande->date_choix}}</td>
+                            <td>{{$demande->chercheurs->nom}} {{$demande->chercheurs->prenom}}</td>
+                            <td><a href="{{ asset('demandes_effectuees/'.$demande->fword) }}">Téléchargre Demande</a></td>
+                            @php
+                            if($demande->statu == 'C')
+                            $s = "Confirmée";
+                            if($demande->statu == 'R')
+                            $s = "Realisable";
+                            if($demande->statu == 'NR')
+                            $s = "Irréalisable";
+                            if($demande->statu == 'T')
+                            $s = "Traitée";
+                            @endphp
+                            <td>{{$s}}</td>
+                            <td>
+                                <button class="btn btn-success" onclick="
                     var modal = document.getElementById('modal2');
                     document.getElementById('susID').innerText = 'R'+{{ $demande->id }};
                     modal2.style.display = 'block';
                 ">Réalisable</button>
-                <a href="{{route('Realise-demande', ['id' => $demande->id]) }}" style="display:none;" id="rightRealisable{{$demande->id}}" >Accepte</a>
-            </td>
-            <td>
-                <button class="btn btn-danger" onclick="
+                                <a href="{{route('Realise-demande', ['id' => $demande->id]) }}" style="display:none;" id="rightRealisable{{$demande->id}}">Accepte</a>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" onclick="
                     document.getElementById('susID').innerText = 'R'+{{ $demande->id }};
                     document.getElementById('idR').value = <?php echo $demande->id; ?> ;
                     var modal = document.getElementById('modal');
                     modal.style.display = 'block';
                 ">Irréalisable</button>
-            </td>
-            <td>
-            <button class="btn btn-success" onclick="
+                            </td>
+                            <td>
+                                <button class="btn btn-success" onclick="
                     var modal = document.getElementById('modal2');
                     document.getElementById('susID').innerText = 'T'+{{ $demande->id }};
                     modal2.style.display = 'block';
                 ">Traitée</button>
-                <a href="{{route('Traite-demande', ['id' => $demande->id]) }}" style="display:none;" id="rightTraite{{$demande->id}}" >Accepte</a>
-            </td>
-        </tr>
-        @endif
-        @endif
-        @endforeach
-    </tbody>
-</table>
+                                <a href="{{route('Traite-demande', ['id' => $demande->id]) }}" style="display:none;" id="rightTraite{{$demande->id}}">Accepte</a>
+                            </td>
+                        </tr>
+                        @endif
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
 
 <div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close1">&times;</span>
-    <h2 class="text-center mb-5 pb-5">Confirmation d'action</h2>
-    <form id="updateForm1" method="POST" action="{{ route('Non_Realise-demande') }}">
-        @csrf
-        <input id="idR" name="idR" type="number" class="hidden">
-        <label for="commentaire" class="form-label">Commentaire : </label><br>
-        <textarea name="commentaire" id="commentaire" cols="100" rows="5" required></textarea>
-        <div class="row pt-5">
-            <div class="col-md-5"></div>
-            <button class="col-md-3 btn btn-success" type="submit">Envoyer</button>
-            <div class="col-md-1"></div>
-            <button id="close2"class="col-md-2 btn btn-danger">Annuler</button>
-        </div>
-    </form>
-  </div>
+    <div class="modal-content">
+        <span class="close1">&times;</span>
+        <h2 class="text-center mb-5 pb-5">Confirmation d'action</h2>
+        <form id="updateForm1" method="POST" action="{{ route('Non_Realise-demande') }}">
+            @csrf
+            <input id="idR" name="idR" type="number" class="hidden">
+            <label for="commentaire" class="form-label">Commentaire : </label><br>
+            <textarea name="commentaire" id="commentaire" cols="100" rows="5" required></textarea>
+            <div class="row pt-5">
+                <div class="col-md-5"></div>
+                <button class="col-md-3 btn btn-success" type="submit">Envoyer</button>
+                <div class="col-md-1"></div>
+                <button id="close2" class="col-md-2 btn btn-danger">Annuler</button>
+            </div>
+        </form>
+    </div>
 </div>
 <div id="modal2" class="modal">
-  <div class="modal-content">
-    <span class="close3">&times;</span>
-    <h2 class="text-center mb-5 pb-5">Confirmation d'action</h2>
-    <div class="row pt-5">
-        <div class="col-md-5"></div>
-        <button class="col-md-3 btn btn-success" onclick="
+    <div class="modal-content">
+        <span class="close3">&times;</span>
+        <h2 class="text-center mb-5 pb-5">Confirmation d'action</h2>
+        <div class="row pt-5">
+            <div class="col-md-5"></div>
+            <button class="col-md-3 btn btn-success" onclick="
             susID = document.getElementById('susID').innerText ;
             var part1 = susID.charAt(0); 
             var part2 = susID.substring(1);
@@ -289,79 +308,88 @@
                 document.getElementById('rightTraite'+part2).click();
             }
         ">Oui</button>
-        <div class="col-md-1"></div>
-        <button id="close4"class="col-md-2 btn btn-danger">Non</button>
+            <div class="col-md-1"></div>
+            <button id="close4" class="col-md-2 btn btn-danger">Non</button>
+        </div>
     </div>
-  </div>
 </div>
 <style>
     .modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
     }
+
     .modal-content {
-    background-color: #fff;
-    margin: 20% auto;
-    padding: 20px;
-    width: 60%;
+        background-color: #fff;
+        margin: 20% auto;
+        padding: 20px;
+        width: 60%;
     }
+
     .close1 {
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+        color: black;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
     }
+
     .close1:hover,
     .close1:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
     }
+
     .close2 {
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+        color: black;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
     }
+
     .close2:hover,
     .close2:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
     }
+
     .close3 {
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+        color: black;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
     }
+
     .close3:hover,
     .close3:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
     }
+
     .close4 {
-    color: black;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+        color: black;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
     }
+
     .close4:hover,
     .close4:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
     }
 </style>
 <script>
@@ -395,9 +423,6 @@
 <!-- Admin brows page -->
 
 @else
-<li class="nav-item">
-    <h1>this is Admin page </h1>
-</li>
 @section('content')
 <div class="page-content browse container-fluid">
     @include('voyager::alerts')
